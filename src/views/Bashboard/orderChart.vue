@@ -62,7 +62,7 @@
               roseType: 'radius',
               data: [
                 { value: 320, name: '已完成' },
-                { value: 240, name: '代付款' },
+                { value: 240, name: '待付款' },
                 { value: 149, name: '待发货' },
                 { value: 100, name: '已发货' },
                 { value: 59, name: '已取消' }
