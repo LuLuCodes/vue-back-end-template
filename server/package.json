@@ -1,0 +1,30 @@
+{
+  "name": "vue2-express-web-server",
+  "version": "1.0.0",
+  "description": "vue2-express-web-server",
+  "author": "joneqian",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "start:strict": "node --use-strict ./bin/www"
+  },
+  "dependencies": {
+    "ali-oss": "^4.4.4",
+    "async": "^1.5.2",
+    "axios": "^0.15.3",
+    "body-parser": "~1.15.2",
+    "co": "^4.6.0",
+    "compression": "^1.6.2",
+    "connect-redis": "^3.2.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "ejs": "~2.5.2",
+    "excel-export": "^0.5.1",
+    "exceljs": "^0.2.46",
+    "express": "~4.14.0",
+    "express-session": "^1.15.0",
+    "log4js": "^1.1.1",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.0"
+  }
+}
