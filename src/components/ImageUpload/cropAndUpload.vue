@@ -52,8 +52,6 @@
         this.emitInput(file.files.file);
       },
       beforeUpload() {
-        return new Promise((resolve, reject) => {
-        });
       }
     }
   };
@@ -75,7 +73,7 @@
       position: relative;
       border: 1px dashed #d9d9d9;
       float: left;
-      margin-left: 50px;
+      margin-left: 10px;
       .image-preview-wrapper {
         position: relative;
         width: 100%;
