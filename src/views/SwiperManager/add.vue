@@ -81,7 +81,7 @@
       <el-tab-pane v-if="postForm.linkType === 3" label="外部链接">外部链接</el-tab-pane>
     </el-tabs>
     
-    <sample-good-list-dialog :show-dialog="showGoodListDialog"></sample-good-list-dialog>
+    <sample-good-list-dialog :show-dialog="showGoodListDialog" @closeDialog="showGoodListDialog = false"></sample-good-list-dialog>
   </div>
 </template>
 

@@ -1,5 +1,6 @@
 <template>
-  <el-dialog :title="tableTitle" :visible.sync="showDialog" size="large" top="3%" @open="openDialog">
+  <el-dialog :title="tableTitle" :visible="showDialog" :close-on-click-modal="false" :close-on-press-escape="false"
+             :show-close="false" size="large" top="3%" @open="openDialog" @close="closeDialog">
     <div class="filter-container">
       <el-row>
         <el-col :span="14" :offset="12">
@@ -58,8 +59,8 @@
     </div>
     
     <div slot="footer" class="dialog-footer">
-      <el-button @click="showDialog = false">取 消</el-button>
-      <el-button type="primary" @click="showDialog = false">确 定</el-button>
+      <el-button @click="closeDialog">取 消</el-button>
+      <el-button type="primary">确 定</el-button>
     </div>
   </el-dialog>
 </template>
@@ -351,7 +352,8 @@
         default: '商品列表'
       }
     },
-    computed: {},
+    computed: {
+    },
     filters: {
       statusFilter(status) {
         const statusMap = ['danger', 'success'];
@@ -374,6 +376,9 @@
       };
     },
     methods: {
+      closeDialog() {
+        this.$emit('closeDialog');
+      },
       openDialog() {
         this.listQuery = {
           page: 1,
@@ -382,6 +387,9 @@
           title: undefined,
           status: undefined
         };
+        this.listLoading = false;
+        this.list = null;
+        this.total = null;
         this.getList();
       },
       getList() {
