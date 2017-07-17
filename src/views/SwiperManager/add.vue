@@ -59,7 +59,7 @@
             { min: 5, max: 20, message: '长度在 5 到 20 个字符', trigger: 'blur' }
           ],
           linkType: [
-            { required: true, message: '请选择轮播图链接类型', trigger: 'change' }
+            { required: true, message: '请选择轮播图链接类型', trigger: 'blur' }
           ],
           image_uri: [
             { required: true, message: '请设置轮播图', trigger: 'blur' }
