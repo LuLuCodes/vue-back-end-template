@@ -33,10 +33,7 @@
         </template>
       </el-table-column>
       
-      <el-table-column align="center" min-width="200px" label="商品名称" show-overflow-tooltip>
-        <template scope="scope">
-          <span class="link-type">{{scope.row.title}}</span>
-        </template>
+      <el-table-column align="center" prop="title" min-width="200px" label="商品名称" show-overflow-tooltip>
       </el-table-column>
       
       <el-table-column align="center" prop="id" label="商品编码">
@@ -355,6 +352,12 @@
       }
     },
     computed: {},
+    filters: {
+      statusFilter(status) {
+        const statusMap = ['danger', 'success'];
+        return statusMap[status];
+      }
+    },
     data() {
       return {
         listLoading: false,
@@ -367,24 +370,7 @@
           id: undefined,
           title: undefined,
           status: undefined
-        },
-        gridData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }]
+        }
       };
     },
     methods: {
