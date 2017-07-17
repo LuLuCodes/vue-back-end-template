@@ -33,6 +33,54 @@
       </div>
     </el-form>
   
+    <el-tabs type="border-card" style="margin: 20px;">
+      <el-tab-pane v-if="postForm.linkType === 1" label="多个商品选择">
+        <div class="filter-container">
+          <el-row>
+            <el-col :span="12">
+              <el-button-group>
+                <el-button size="small" type="success" icon="plus">新增</el-button>
+                <el-button size="small" type="danger" icon="delete">删除</el-button>
+              </el-button-group>
+            </el-col>
+          </el-row>
+  
+          <el-table :data="goodMultiList" height="200" fit highlight-current-row style="width: 100%;margin-top: 10px;">
+            <el-table-column  align="center"
+                              type="selection"
+                              width="55">
+            </el-table-column>
+  
+            <el-table-column align="center" width="240px" label="商品主图">
+              <template scope="scope">
+                <img :src="scope.row.url" style="width: 240px;height: 120px;padding-top: 5px;"/>
+              </template>
+            </el-table-column>
+            
+            <el-table-column align="center" min-width="200px" label="商品名称">
+              <template scope="scope">
+                <span class="link-type">{{scope.row.title}}</span>
+              </template>
+            </el-table-column>
+  
+            <el-table-column align="center" min-width="200px" label="商品编码">
+              <template scope="scope">
+                <span class="link-type">{{scope.row.id}}</span>
+              </template>
+            </el-table-column>
+    
+            <el-table-column align="center" label="状态" width="100">
+              <template scope="scope">
+                <el-tag :type="scope.row.status | statusFilter">{{scope.row.status ? '已发布':'未发布'}}</el-tag>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+      </el-tab-pane>
+      <el-tab-pane v-if="postForm.linkType === 2" label="单个商品选择">单个商品选择</el-tab-pane>
+      <el-tab-pane v-if="postForm.linkType === 3" label="外部链接">外部链接</el-tab-pane>
+    </el-tabs>
+    
   </div>
 </template>
 
@@ -48,9 +96,10 @@
     },
     data() {
       return {
+        goodMultiList: [],
         postForm: {
           name: '',
-          linkType: '',
+          linkType: 1,
           image_uri: ''
         },
         rules: {
@@ -94,7 +143,7 @@
   .createPost-container {
     position: relative;
     .createPost-main-container {
-      padding: 40px 45px 20px 50px;
+      margin: 20px;
       .postInfo-container {
         position: relative;
         @include clearfix;
