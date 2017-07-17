@@ -9,7 +9,7 @@
 <script>
   import screenfull from 'screenfull';
   export default {
-    name: 'hamburger',
+    name: 'ScreenFull',
     props: {
       width: {
         type: Number,

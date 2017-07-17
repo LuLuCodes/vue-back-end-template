@@ -39,7 +39,7 @@
           <el-row>
             <el-col :span="12">
               <el-button-group>
-                <el-button size="small" type="success" icon="plus">新增</el-button>
+                <el-button size="small" type="success" icon="plus" @click="showGoodListDialog = true">新增</el-button>
                 <el-button size="small" type="danger" icon="delete">删除</el-button>
               </el-button-group>
             </el-col>
@@ -81,21 +81,25 @@
       <el-tab-pane v-if="postForm.linkType === 3" label="外部链接">外部链接</el-tab-pane>
     </el-tabs>
     
+    <sample-good-list-dialog :show-dialog="showGoodListDialog"></sample-good-list-dialog>
   </div>
 </template>
 
 <script>
   import Sticky from '../../components/Sticky/index.vue';
   import {CropAndUpload} from '../../components/ImageUpload';
+  import {SampleGoodListDialog} from '../../components/GoodListDialog/index';
   
   export default {
     name: 'add-swiper',
     components: {
       Sticky,
-      CropAndUpload
+      CropAndUpload,
+      SampleGoodListDialog
     },
     data() {
       return {
+        showGoodListDialog: false,
         goodMultiList: [],
         postForm: {
           name: '',

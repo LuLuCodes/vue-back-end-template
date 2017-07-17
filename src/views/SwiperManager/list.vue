@@ -139,7 +139,7 @@
           page: 1,
           limit: 20,
           title: undefined,
-          status: [0]
+          status: undefined
         },
         swiperStatus: [{ label: '已发布', value: 1 }, { label: '未发布', value: 0 }]
       };
