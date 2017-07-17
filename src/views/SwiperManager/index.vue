@@ -15,7 +15,7 @@
           </el-input>
   
           <el-select clearable style="width: 100px" class="filter-item" v-model="listQuery.status" placeholder="状态" size="small">
-            <el-option v-for="item in importanceOptions" :key="item" :label="item" :value="item">
+            <el-option v-for="item in swiperStatus" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
           </el-select>
           <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter" size="small">搜索</el-button>
@@ -25,7 +25,12 @@
     </div>
     
     <el-table :data="list" v-loading.body="listLoading" height="580" fit highlight-current-row style="width: 100%">
-      <el-table-column
+      <el-table-column  align="center"
+        type="selection"
+        width="55">
+      </el-table-column>
+      
+      <el-table-column  align="center"
         type="index"
         width="50">
       </el-table-column>
@@ -48,31 +53,31 @@
   
       
       
-      <el-table-column min-width="200px" label="名称">
+      <el-table-column align="center" min-width="200px" label="名称">
         <template scope="scope">
           <span class="link-type" @click="handleUpdate(scope.row)">{{scope.row.title}}</span>
         </template>
       </el-table-column>
   
-      <el-table-column min-width="150px" label="名称">
+      <el-table-column align="center" width="240px" label="轮播图">
         <template scope="scope">
           <img :src="scope.row.url" style="width: 240px;height: 120px;padding-top: 5px;"/>
         </template>
       </el-table-column>
       
-      <el-table-column class-name="status-col" label="状态" width="90">
+      <el-table-column align="center" label="状态" width="100">
         <template scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{scope.row.status ? '已发布':'已撤下'}}</el-tag>
+          <el-tag :type="scope.row.status | statusFilter">{{scope.row.status ? '已发布':'未发布'}}</el-tag>
         </template>
       </el-table-column>
       
       <el-table-column align="center" label="操作" width="150">
         <template scope="scope">
-          <el-button v-if="scope.row.status!='published'" size="small" type="success" @click="handleModifyStatus(scope.row,'published')">发布
+          <el-button v-if="scope.row.status === 0" size="small" type="info" @click="handleModifyStatus(scope.row, 1)">发布
           </el-button>
-          <el-button v-if="scope.row.status!='draft'" size="small" @click="handleModifyStatus(scope.row,'draft')">草稿
+          <el-button v-if="scope.row.status === 1" size="small" type="warning" @click="handleModifyStatus(scope.row, 0)">撤下
           </el-button>
-          <el-button v-if="scope.row.status!='deleted'" size="small" type="danger" @click="handleModifyStatus(scope.row,'deleted')">删除
+          <el-button size="small" type="danger" @click="handleDelete(scope.row )">删除
           </el-button>
         </template>
       </el-table-column>
@@ -136,19 +141,7 @@
           title: undefined,
           status: [0]
         },
-        importanceOptions: [1, 2, 3],
-        sortOptions: [{ label: '按ID升序列', key: '+id' }, { label: '按ID降序', key: '-id' }],
-        statusOptions: ['published', 'draft', 'deleted'],
-        dialogFormVisible: false,
-        dialogStatus: '',
-        textMap: {
-          update: '编辑',
-          create: '创建'
-        },
-        dialogPvVisible: false,
-        pvData: [],
-        showAuditor: false,
-        tableKey: 0
+        swiperStatus: [{ label: '已发布', value: 1 }, { label: '未发布', value: 0 }]
       };
     },
     created() {
