@@ -39,7 +39,7 @@
           <el-row>
             <el-col :span="12">
               <el-button-group>
-                <el-button size="small" type="success" icon="plus" @click="showGoodListDialog = true">新增</el-button>
+                <el-button size="small" type="success" icon="plus" @click="showMultiSelectGoodListDialog = true">新增</el-button>
                 <el-button size="small" type="danger" icon="delete">删除</el-button>
               </el-button-group>
             </el-col>
@@ -77,29 +77,74 @@
           </el-table>
         </div>
       </el-tab-pane>
-      <el-tab-pane v-if="postForm.linkType === 2" label="单个商品选择">单个商品选择</el-tab-pane>
+      <el-tab-pane v-if="postForm.linkType === 2" label="单个商品选择">
+        <div class="filter-container">
+          <el-row>
+            <el-col :span="12">
+              <el-button-group>
+                <el-button size="small" type="success" icon="plus" @click="showSingleSelectGoodDialogDialog = true">新增</el-button>
+                <el-button size="small" type="danger" icon="delete">删除</el-button>
+              </el-button-group>
+            </el-col>
+          </el-row>
+    
+          <el-table :data="goodMultiList" height="200" fit highlight-current-row style="width: 100%;margin-top: 10px;">
+            <el-table-column  align="center"
+                              type="selection"
+                              width="55">
+            </el-table-column>
+      
+            <el-table-column align="center" width="240px" label="商品主图">
+              <template scope="scope">
+                <img :src="scope.row.url" style="width: 240px;height: 120px;padding-top: 5px;"/>
+              </template>
+            </el-table-column>
+      
+            <el-table-column align="center" min-width="200px" label="商品名称">
+              <template scope="scope">
+                <span class="link-type">{{scope.row.title}}</span>
+              </template>
+            </el-table-column>
+      
+            <el-table-column align="center" min-width="200px" label="商品编码">
+              <template scope="scope">
+                <span class="link-type">{{scope.row.id}}</span>
+              </template>
+            </el-table-column>
+      
+            <el-table-column align="center" label="状态" width="100">
+              <template scope="scope">
+                <el-tag :type="scope.row.status | statusFilter">{{scope.row.status ? '已发布':'未发布'}}</el-tag>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+      </el-tab-pane>
       <el-tab-pane v-if="postForm.linkType === 3" label="外部链接">外部链接</el-tab-pane>
     </el-tabs>
     
-    <sample-good-list-dialog :show-dialog="showGoodListDialog" @closeDialog="showGoodListDialog = false"></sample-good-list-dialog>
+    <multi-select-good-list-dialog :show-dialog="showMultiSelectGoodListDialog" @closeDialog="showMultiSelectGoodListDialog = false"></multi-select-good-list-dialog>
+    <single-select-good-dialog :show-dialog="showSingleSelectGoodDialogDialog" @closeDialog="showSingleSelectGoodDialogDialog = false"></single-select-good-dialog>
   </div>
 </template>
 
 <script>
   import Sticky from '../../components/Sticky/index.vue';
   import {CropAndUpload} from '../../components/ImageUpload';
-  import {SampleGoodListDialog} from '../../components/GoodListDialog/index';
+  import {SingleSelectGoodDialog, MultiSelectGoodListDialog} from '../../components/GoodListDialog/index';
   
   export default {
     name: 'add-swiper',
     components: {
       Sticky,
       CropAndUpload,
-      SampleGoodListDialog
+      MultiSelectGoodListDialog,
+      SingleSelectGoodDialog
     },
     data() {
       return {
-        showGoodListDialog: false,
+        showMultiSelectGoodListDialog: false,
+        showSingleSelectGoodDialogDialog: false,
         goodMultiList: [],
         postForm: {
           name: '',
