@@ -4,24 +4,26 @@
       <el-tab-pane>
         <span slot="label">
           全部客户
+          <el-badge :value="allClientCount" :max="99" class="badge">
+          </el-badge>
         </span>
-        <all-client-pane></all-client-pane>
+        <all-client-pane @updateCount="updateAllCount"></all-client-pane>
       </el-tab-pane>
       <el-tab-pane>
         <span slot="label">
           启用客户
-          <el-badge :value="200" :max="99" class="badge">
+          <el-badge :value="enableClientCount" :max="99" class="badge">
           </el-badge>
         </span>
-        <enable-client-pane></enable-client-pane>
+        <enable-client-pane @updateCount="updateEnableCount"></enable-client-pane>
       </el-tab-pane>
       <el-tab-pane>
         <span slot="label">
           禁用客户
-          <el-badge :value="200" :max="99" class="badge">
+          <el-badge :value="disableClientCount" :max="99" class="badge">
           </el-badge>
         </span>
-        <disable-client-pane></disable-client-pane>
+        <disable-client-pane @updateCount="updateDisableCount"></disable-client-pane>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -35,7 +37,11 @@
   export default {
     name: 'client-list',
     data() {
-      return {};
+      return {
+        allClientCount: 0,
+        enableClientCount: 0,
+        disableClientCount: 0
+      };
     },
     components: {
       AllClientPane,
@@ -45,7 +51,17 @@
     created() {
     },
     filters: {},
-    methods: {}
+    methods: {
+      updateAllCount(val) {
+        this.allClientCount = val;
+      },
+      updateEnableCount(val) {
+        this.enableClientCount = val;
+      },
+      updateDisableCount(val) {
+        this.disableClientCount = val;
+      }
+    }
   };
 </script>
 

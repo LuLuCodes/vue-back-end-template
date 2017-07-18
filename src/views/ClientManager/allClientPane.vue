@@ -6,6 +6,7 @@
           <el-button-group>
             <el-button size="small" type="info" icon="check">启用</el-button>
             <el-button size="small" type="warning" icon="close">禁用</el-button>
+            <el-button size="small" type="danger" icon="delete">删除</el-button>
           </el-button-group>
         </el-col>
         <el-col :span="12">
@@ -146,6 +147,7 @@
           this.list = testData.slice(((this.listQuery.page - 1) * this.listQuery.limit), this.listQuery.page * this.listQuery.limit);
           this.total = testData.length;
           this.listLoading = false;
+          this.$emit('updateCount', this.total);
         }, 2000);
       },
       handleSizeChange(val) {
@@ -160,8 +162,6 @@
       },
       handleDetail() {},
       filterStatus(value, row) {
-        console.log('value: ' + value);
-        console.log('row: ' + row);
         return row.status === value;
       }
     }
