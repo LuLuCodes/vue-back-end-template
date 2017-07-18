@@ -9,7 +9,7 @@
         <base-info-pane :client-id="clientId"></base-info-pane>
       </el-tab-pane>
       <el-tab-pane label="收货地址">
-        <delivery-address :client-id="clientId"></delivery-address>
+        <delivery-address-pane :client-id="clientId"></delivery-address-pane>
       </el-tab-pane>
       <el-tab-pane label="账户钱包">账户钱包</el-tab-pane>
       <el-tab-pane label="历史订单">历史订单</el-tab-pane>
@@ -22,14 +22,14 @@
 <script>
   import Sticky from '../../components/Sticky/index.vue';
   import BaseInfoPane from './baseInfoPane.vue';
-  import DeliveryAddress from './deliveryAddress.vue';
+  import DeliveryAddressPane from './deliveryAddressPane.vue';
   
   export default {
     name: '',
     components: {
       Sticky,
       BaseInfoPane,
-      DeliveryAddress
+      DeliveryAddressPane
     },
     data() {
       return {};
