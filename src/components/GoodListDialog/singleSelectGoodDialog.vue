@@ -22,7 +22,7 @@
     
     </div>
     
-    <el-table :data="list" height="450" v-loading.body="listLoading" fit highlight-current-row style="width: 100%;" highlight-current-row
+    <el-table :data="list" height="450" v-loading="listLoading" element-loading-text="拼命加载中" fit highlight-current-row style="width: 100%;" highlight-current-row
               @current-change="handleTableCurrentChange">
       <el-table-column align="center" width="240px" label="商品主图">
         <template scope="scope">

@@ -3,16 +3,29 @@
     <sticky :className="'sub-navbar published'">
       <el-button type="warning" @click="goBack()">返回</el-button>
     </sticky>
+  
+    <el-tabs type="border-card">
+      <el-tab-pane label="基础信息">
+        <base-info-pane :client-id="clientId"></base-info-pane>
+      </el-tab-pane>
+      <el-tab-pane label="收货地址">收货地址</el-tab-pane>
+      <el-tab-pane label="账户钱包">账户钱包</el-tab-pane>
+      <el-tab-pane label="历史订单">历史订单</el-tab-pane>
+      <el-tab-pane label="历史订单">优惠券</el-tab-pane>
+    </el-tabs>
+    
   </div>
 </template>
 
 <script>
   import Sticky from '../../components/Sticky/index.vue';
+  import BaseInfoPane from './baseInfoPane.vue';
   
   export default {
     name: '',
     components: {
-      Sticky
+      Sticky,
+      BaseInfoPane
     },
     data() {
       return {};
@@ -25,6 +38,14 @@
     },
     computed: {},
     created() {
+    },
+    activated() {
+      // 当组件在 <keep-alive> 内被切换，它的 activated 和 deactivated 这两个生命周期钩子函数将会被对应执行
+      // 数据加载应该放在此处
+    },
+    deactivated() {
+      // 当组件在 <keep-alive> 内被切换，它的 activated 和 deactivated 这两个生命周期钩子函数将会被对应执行
+      // 数据加载应该放在此处
     },
     filters: {},
     methods: {

@@ -24,7 +24,7 @@
     
     </div>
     
-    <el-table :data="list" v-loading.body="listLoading" height="580" fit highlight-current-row style="width: 100%">
+    <el-table :data="list" v-loading="listLoading" element-loading-text="拼命加载中" height="580" fit highlight-current-row style="width: 100%">
       <el-table-column  align="center"
                         type="selection"
                         width="55">

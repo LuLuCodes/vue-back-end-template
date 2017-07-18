@@ -21,7 +21,7 @@
       </el-row>
     </div>
     
-    <el-table :data="list" v-loading.body="listLoading" height="500" border fit highlight-current-row style="width: 100%"
+    <el-table :data="list" v-loading="listLoading" element-loading-text="拼命加载中" height="500" border fit highlight-current-row style="width: 100%"
               :default-sort = "{prop: 'id', order: 'descending'}">
       <el-table-column align="center"
                        type="selection"

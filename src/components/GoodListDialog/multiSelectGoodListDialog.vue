@@ -22,7 +22,7 @@
     
     </div>
     
-    <el-table ref="goodTable" :data="list" height="450" v-loading.body="listLoading" fit highlight-current-row style="width: 100%;"
+    <el-table ref="goodTable" :data="list" height="450" v-loading="listLoading" element-loading-text="拼命加载中" fit highlight-current-row style="width: 100%;"
               @select="handleSelection" @select-all="handleSelectionAll">
       <el-table-column align="center"
                        type="selection"
