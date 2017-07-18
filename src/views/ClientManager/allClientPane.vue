@@ -118,7 +118,7 @@
       return {
         list: null,
         total: null,
-        listLoading: true,
+        listLoading: false,
         listQuery: {
           page: 1,
           limit: 20,

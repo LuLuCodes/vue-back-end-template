@@ -1,6 +1,6 @@
 <template>
   <div class="createPost-container">
-    <el-form class="form-container" :model="baseInfo" ref="baseInfo">
+    <el-form v-loading="infoLoading" element-loading-text="拼命加载中" class="form-container" :model="baseInfo" ref="baseInfo">
       <div class="createPost-main-container">
         <el-row>
           <el-col :span="5">

@@ -4,11 +4,13 @@
       <el-button type="warning" @click="goBack()">返回</el-button>
     </sticky>
   
-    <el-tabs type="border-card">
+    <el-tabs>
       <el-tab-pane label="基础信息">
         <base-info-pane :client-id="clientId"></base-info-pane>
       </el-tab-pane>
-      <el-tab-pane label="收货地址">收货地址</el-tab-pane>
+      <el-tab-pane label="收货地址">
+        <delivery-address :client-id="clientId"></delivery-address>
+      </el-tab-pane>
       <el-tab-pane label="账户钱包">账户钱包</el-tab-pane>
       <el-tab-pane label="历史订单">历史订单</el-tab-pane>
       <el-tab-pane label="历史订单">优惠券</el-tab-pane>
@@ -20,12 +22,14 @@
 <script>
   import Sticky from '../../components/Sticky/index.vue';
   import BaseInfoPane from './baseInfoPane.vue';
+  import DeliveryAddress from './deliveryAddress.vue';
   
   export default {
     name: '',
     components: {
       Sticky,
-      BaseInfoPane
+      BaseInfoPane,
+      DeliveryAddress
     },
     data() {
       return {};
