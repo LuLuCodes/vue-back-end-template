@@ -11,9 +11,11 @@ import Login from '../views/Login/index.vue';
 /* dashboard */
 import Bashboard from '../views/Bashboard/index.vue';
 
-/* components */
+/* swiper manager */
 import SwiperManager from '../views/SwiperManager/index.vue';
 
+/* client manager */
+import ClientManager from '../views/ClientManager/index.vue';
 
 /* error page */
 import Err404 from '../views/Error/404.vue';
@@ -62,6 +64,15 @@ export const asyncRouterMap = [
     children: [
       {path: 'swiper-manager', component: SwiperManager, name: '轮播图设置'}
     ]
+  },
+  {
+    path: '/client-manager',
+    component: Layout,
+    redirect: '/client-manager/index',
+    name: '客户管理',
+    icon: 'fa-users',
+    noDropdown: true,
+    children: [{path: 'index', component: ClientManager, name: '客户管理'}]
   },
   {path: '*', redirect: '/404', hidden: true}
 ];
