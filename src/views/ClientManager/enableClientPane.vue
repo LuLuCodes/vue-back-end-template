@@ -157,7 +157,9 @@
       },
       handleFilter() {
       },
-      handleDetail() {}
+      handleDetail(client) {
+        this.$emit('goToDetial', client.id);
+      }
     }
   };
 </script>

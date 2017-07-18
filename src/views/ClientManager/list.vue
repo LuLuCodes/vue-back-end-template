@@ -7,7 +7,7 @@
           <el-badge :value="allClientCount" :max="99" class="badge">
           </el-badge>
         </span>
-        <all-client-pane @updateCount="updateAllCount"></all-client-pane>
+        <all-client-pane @updateCount="updateAllCount" @goToDetial="goToDetial"></all-client-pane>
       </el-tab-pane>
       <el-tab-pane>
         <span slot="label">
@@ -15,7 +15,7 @@
           <el-badge :value="enableClientCount" :max="99" class="badge">
           </el-badge>
         </span>
-        <enable-client-pane @updateCount="updateEnableCount"></enable-client-pane>
+        <enable-client-pane @updateCount="updateEnableCount" @goToDetial="goToDetial"></enable-client-pane>
       </el-tab-pane>
       <el-tab-pane>
         <span slot="label">
@@ -23,7 +23,7 @@
           <el-badge :value="disableClientCount" :max="99" class="badge">
           </el-badge>
         </span>
-        <disable-client-pane @updateCount="updateDisableCount"></disable-client-pane>
+        <disable-client-pane @updateCount="updateDisableCount" @goToDetial="goToDetial"></disable-client-pane>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -60,6 +60,9 @@
       },
       updateDisableCount(val) {
         this.disableClientCount = val;
+      },
+      goToDetial(id) {
+        this.$emit('changeView', 'edit', {clientID: id});
       }
     }
   };

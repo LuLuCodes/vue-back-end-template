@@ -160,7 +160,9 @@
       },
       handleFilter() {
       },
-      handleDetail() {},
+      handleDetail(client) {
+        this.$emit('goToDetial', client.id);
+      },
       filterStatus(value, row) {
         return row.status === value;
       }
