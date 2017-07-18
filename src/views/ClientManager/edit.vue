@@ -11,10 +11,10 @@
       <el-tab-pane label="收货地址">
         <delivery-address-pane :client-id="clientId"></delivery-address-pane>
       </el-tab-pane>
-      <el-tab-pane label="账户钱包">账户钱包</el-tab-pane>
       <el-tab-pane label="历史订单">
         <history-order-pane :client-id="clientId"></history-order-pane>
       </el-tab-pane>
+      <el-tab-pane label="账户钱包">账户钱包</el-tab-pane>
       <el-tab-pane label="优惠券">优惠券</el-tab-pane>
     </el-tabs>
     
