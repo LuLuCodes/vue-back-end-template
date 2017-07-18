@@ -56,7 +56,7 @@
     
     <div slot="footer" class="dialog-footer">
       <el-button @click="closeDialog">取 消</el-button>
-      <el-button type="primary">确 定</el-button>
+      <el-button type="primary" @click="submitGood">确 定</el-button>
     </div>
   </el-dialog>
 </template>
@@ -410,6 +410,10 @@
       },
       handleTableCurrentChange(currentRow) {
         this.selectGood = currentRow;
+      },
+      submitGood() {
+        this.$emit('submitSelectGood', this.selectGood);
+        this.$emit('closeDialog');
       }
     }
   };

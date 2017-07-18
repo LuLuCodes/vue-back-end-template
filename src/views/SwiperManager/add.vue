@@ -33,8 +33,8 @@
       </div>
     </el-form>
   
-    <el-tabs type="border-card" style="margin: 20px;">
-      <el-tab-pane v-if="postForm.linkType === 1" label="多个商品选择">
+    <el-tabs v-show="postForm.linkType === 1" type="border-card" style="margin: 20px;">
+      <el-tab-pane label="多个商品选择">
         <div class="filter-container">
           <el-row>
             <el-col :span="12">
@@ -45,25 +45,25 @@
             </el-col>
           </el-row>
   
-          <el-table :data="goodMultiList" height="200" fit highlight-current-row style="width: 100%;margin-top: 10px;">
+          <el-table :data="goodMultiList" height="400" fit highlight-current-row style="width: 100%;margin-top: 10px;">
             <el-table-column  align="center"
                               type="selection"
                               width="55">
             </el-table-column>
   
-            <el-table-column align="center" width="240px" label="商品主图">
+            <el-table-column align="center" width="120" label="商品主图">
               <template scope="scope">
-                <img :src="scope.row.url" style="width: 240px;height: 120px;padding-top: 5px;"/>
+                <img :src="scope.row.url" style="width: 120px;height: 100px;padding-top: 5px;"/>
               </template>
             </el-table-column>
             
-            <el-table-column align="center" min-width="200px" label="商品名称">
+            <el-table-column align="center" min-width="200" label="商品名称">
               <template scope="scope">
                 <span class="link-type">{{scope.row.title}}</span>
               </template>
             </el-table-column>
   
-            <el-table-column align="center" min-width="200px" label="商品编码">
+            <el-table-column align="center" width="200" label="商品编码">
               <template scope="scope">
                 <span class="link-type">{{scope.row.id}}</span>
               </template>
@@ -71,13 +71,16 @@
     
             <el-table-column align="center" label="状态" width="100">
               <template scope="scope">
-                <el-tag :type="scope.row.status | statusFilter">{{scope.row.status ? '已发布':'未发布'}}</el-tag>
+                <el-tag :type="scope.row.status | statusFilter">{{scope.row.status ? '可售':'停售'}}</el-tag>
               </template>
             </el-table-column>
           </el-table>
         </div>
       </el-tab-pane>
-      <el-tab-pane v-if="postForm.linkType === 2" label="单个商品选择">
+    </el-tabs>
+  
+    <el-tabs v-show="postForm.linkType === 2" type="border-card" style="margin: 20px;">
+      <el-tab-pane label="单个商品选择">
         <div class="filter-container">
           <el-row>
             <el-col :span="12">
@@ -87,44 +90,42 @@
               </el-button-group>
             </el-col>
           </el-row>
-    
-          <el-table :data="goodMultiList" height="200" fit highlight-current-row style="width: 100%;margin-top: 10px;">
-            <el-table-column  align="center"
-                              type="selection"
-                              width="55">
-            </el-table-column>
       
-            <el-table-column align="center" width="240px" label="商品主图">
+          <el-table :data="goodSingleList" height="400" fit highlight-current-row style="width: 100%;margin-top: 10px;">
+            <el-table-column align="center" width="120" label="商品主图">
               <template scope="scope">
-                <img :src="scope.row.url" style="width: 240px;height: 120px;padding-top: 5px;"/>
+                <img :src="scope.row.url" style="width: 120px;height: 100px;padding-top: 5px;"/>
               </template>
             </el-table-column>
-      
-            <el-table-column align="center" min-width="200px" label="商品名称">
+        
+            <el-table-column align="center" min-width="200" label="商品名称">
               <template scope="scope">
                 <span class="link-type">{{scope.row.title}}</span>
               </template>
             </el-table-column>
-      
-            <el-table-column align="center" min-width="200px" label="商品编码">
+        
+            <el-table-column align="center" width="200" label="商品编码">
               <template scope="scope">
                 <span class="link-type">{{scope.row.id}}</span>
               </template>
             </el-table-column>
-      
+        
             <el-table-column align="center" label="状态" width="100">
               <template scope="scope">
-                <el-tag :type="scope.row.status | statusFilter">{{scope.row.status ? '已发布':'未发布'}}</el-tag>
+                <el-tag :type="scope.row.status | statusFilter">{{scope.row.status ? '可售':'停售'}}</el-tag>
               </template>
             </el-table-column>
           </el-table>
         </div>
       </el-tab-pane>
-      <el-tab-pane v-if="postForm.linkType === 3" label="外部链接">外部链接</el-tab-pane>
+    </el-tabs>
+  
+    <el-tabs v-show="postForm.linkType === 3" type="border-card" style="margin: 20px;">
+      <el-tab-pane label="外部链接">外部链接</el-tab-pane>
     </el-tabs>
     
-    <multi-select-good-list-dialog :show-dialog="showMultiSelectGoodListDialog" @closeDialog="showMultiSelectGoodListDialog = false"></multi-select-good-list-dialog>
-    <single-select-good-dialog :show-dialog="showSingleSelectGoodDialogDialog" @closeDialog="showSingleSelectGoodDialogDialog = false"></single-select-good-dialog>
+    <multi-select-good-list-dialog :selected-good-list ="goodMultiList" :show-dialog="showMultiSelectGoodListDialog" @closeDialog="showMultiSelectGoodListDialog = false" @submitSelectGood="submitMutliSelectGood"></multi-select-good-list-dialog>
+    <single-select-good-dialog :show-dialog="showSingleSelectGoodDialogDialog" @closeDialog="showSingleSelectGoodDialogDialog = false" @submitSelectGood="submitSingleSelectGood"></single-select-good-dialog>
   </div>
 </template>
 
@@ -146,6 +147,7 @@
         showMultiSelectGoodListDialog: false,
         showSingleSelectGoodDialogDialog: false,
         goodMultiList: [],
+        goodSingleList: [],
         postForm: {
           name: '',
           linkType: 1,
@@ -169,11 +171,23 @@
     computed: {},
     created() {
     },
+    filters: {
+      statusFilter(status) {
+        const statusMap = ['danger', 'success'];
+        return statusMap[status];
+      }
+    },
     methods: {
       submitForm() {
       },
       cancel() {
         this.$emit('changView', 'list');
+      },
+      submitMutliSelectGood(selectGoodList) {
+        this.goodMultiList.splice(0, this.goodMultiList.length, ...selectGoodList);
+      },
+      submitSingleSelectGood(selectGood) {
+        this.goodSingleList.splice(0, this.goodMultiList.length, selectGood);
       }
     }
   };
