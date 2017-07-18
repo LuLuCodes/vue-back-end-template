@@ -1,9 +1,13 @@
 <template>
-  <keep-alive>
-    <component :is="currentView" @changeView="changeView">
-      <!-- 非活动组件将被缓存！ -->
-    </component>
-  </keep-alive>
+  <div>
+    <transition name="component-fade" mode="out-in">
+      <keep-alive>
+        <component :is="currentView" @changeView="changeView">
+          <!-- 非活动组件将被缓存！ -->
+        </component>
+      </keep-alive>
+    </transition>
+  </div>
 </template>
 
 <script>
