@@ -22,7 +22,8 @@
     
     </div>
     
-    <el-table :data="list" height="450" v-loading.body="listLoading" fit highlight-current-row style="width: 100%;">
+    <el-table ref="goodTable" :data="list" height="450" v-loading.body="listLoading" fit highlight-current-row style="width: 100%;"
+              @select="handleSelection" @select-all="handleSelectionAll">
       <el-table-column align="center"
                        type="selection"
                        width="55">
@@ -66,6 +67,7 @@
 </template>
 
 <script>
+  import {deepClone} from '../../assets/js/tool';
   const testData = [
     {
       id: 100001,
@@ -350,6 +352,12 @@
       tableTitle: {
         type: String,
         default: '商品列表'
+      },
+      selectedGoodList: {
+        type: Array,
+        default() {
+          return [];
+        }
       }
     },
     computed: {
@@ -362,6 +370,7 @@
     },
     data() {
       return {
+        selectGoodList: null,
         listLoading: false,
         list: null,
         total: null,
@@ -390,6 +399,7 @@
         this.listLoading = false;
         this.list = null;
         this.total = null;
+        this.selectGoodList = deepClone(this.selectedGoodList);
         this.getList();
       },
       getList() {
@@ -398,6 +408,15 @@
           this.list = testData.slice(((this.listQuery.page - 1) * this.listQuery.limit), this.listQuery.page * this.listQuery.limit);
           this.total = testData.length;
           this.listLoading = false;
+          this.$nextTick(() => {
+            for (let selectGood of this.selectGoodList) {
+              for (let good of this.list) {
+                if (selectGood.id === good.id) {
+                  this.$refs.goodTable.toggleRowSelection(good);
+                }
+              }
+            }
+          });
         }, 2000);
       },
       handleFilter() {
@@ -410,6 +429,45 @@
       handleCurrentChange(val) {
         this.listQuery.page = val;
         this.getList();
+      },
+      handleSelection(selection, row) {
+        let selectIndex = -1;
+        for (let [index, good] of this.selectGoodList.entries()) {
+          if (good.id === row.id) {
+            selectIndex = index;
+            break;
+          }
+        }
+        if (selectIndex === -1) {
+          this.selectGoodList.push(row);
+        } else {
+          this.selectGoodList.splice(selectIndex, 1);
+        }
+      },
+      handleSelectionAll(selection) {
+        if (selection.length === 0) {
+          for (let good of this.list) {
+            for (let [selectIndex, selectGood] of this.selectGoodList.entries()) {
+              if (good.id === selectGood.id) {
+                this.selectGoodList.splice(selectIndex, 1);
+                break;
+              }
+            }
+          }
+        } else {
+          for (let good of selection) {
+            let selectIndex = -1;
+            for (let [index, selectGood] of this.selectGoodList.entries()) {
+              if (good.id === selectGood.id) {
+                selectIndex = index;
+                break;
+              }
+            }
+            if (selectIndex === -1) {
+              this.selectGoodList.push(good);
+            }
+          }
+        }
       }
     }
   };
