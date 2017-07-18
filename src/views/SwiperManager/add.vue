@@ -179,9 +179,10 @@
     },
     methods: {
       submitForm() {
+        this.$emit('changeView', 'list');
       },
       cancel() {
-        this.$emit('changView', 'list');
+        this.$emit('changeView', 'list');
       },
       submitMutliSelectGood(selectGoodList) {
         this.goodMultiList.splice(0, this.goodMultiList.length, ...selectGoodList);
