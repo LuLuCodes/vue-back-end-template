@@ -8,15 +8,23 @@
       :expand-on-click-node="false"
       :render-content="renderContent">
     </el-tree>
+    
+    <simple-confirm-dialog :content="confirmContent" :dialog-visible="dialogVisible"></simple-confirm-dialog>
   </div>
 </template>
 
-<script>
+<script type="text/jsx">
+  import {SimpleConfirmDialog} from '../../components/ConfirmDialog';
+  
   export default {
     name: '',
-    components: {},
+    components: {
+      SimpleConfirmDialog
+    },
     data() {
       return {
+        confirmContent: '',
+        dialogVisible: false,
         data2: [{
           id: 1,
           label: '一级 1',
@@ -63,7 +71,30 @@
     created() {
     },
     filters: {},
-    methods: {}
+    methods: {
+      renderContent(h, {node, data, store}) {
+        return (
+          <span>
+            <span>
+              <span>{node.label}</span>
+            </span>
+            <span style="float: right; margin-right: 20px">
+              <el-button-group>
+                <el-button size="mini" type="info" icon="plus" on-click={() => this.append(store, data)}>新增</el-button>
+                <el-button size="mini" type="warning" icon="edit" on-click={() => this.edit(store, data)}>编辑</el-button>
+                <el-button size="mini" type="danger" icon="delete" on-click={() => this.remove(store, data)}>删除</el-button>
+              </el-button-group>
+            </span>
+          </span>
+        );
+      },
+      append() {},
+      edit() {},
+      remove(store, data) {
+        this.confirmContent = `你确定要删除分类${data.label}吗？`;
+        this.dialogVisible =true;
+      }
+    }
   };
 </script>
 <style scoped>
