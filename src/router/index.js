@@ -17,6 +17,12 @@ import SwiperManager from '../views/SwiperManager/index.vue';
 /* client manager */
 import ClientManager from '../views/ClientManager/index.vue';
 
+/* good manager */
+import GoodManager from '../views/GoodManager/index.vue';
+
+/* category manager */
+import CategoryManager from '../views/CategoryManager/index.vue';
+
 /* error page */
 import Err404 from '../views/Error/404.vue';
 import Err401 from '../views/Error/401.vue';
@@ -73,6 +79,17 @@ export const asyncRouterMap = [
     icon: 'fa-users',
     noDropdown: true,
     children: [{path: 'index', component: ClientManager, name: '客户管理'}]
+  },
+  {
+    path: '/good',
+    component: Layout,
+    redirect: '/good/good-manager',
+    name: '商品管理',
+    icon: 'fa-gift',
+    children: [
+      {path: 'good-manager', component: GoodManager, name: '商品列表'},
+      {path: 'category-manager', component: CategoryManager, name: '商品分类设置'}
+    ]
   },
   {path: '*', redirect: '/404', hidden: true}
 ];
