@@ -1,18 +1,24 @@
 <template>
-  <div>
-    {{clientID}}
+  <div class="createPost-container">
+    <sticky :className="'sub-navbar published'">
+      <el-button type="warning" @click="goBack()">返回</el-button>
+    </sticky>
   </div>
 </template>
 
 <script>
+  import Sticky from '../../components/Sticky/index.vue';
+  
   export default {
     name: '',
-    components: {},
+    components: {
+      Sticky
+    },
     data() {
       return {};
     },
     props: {
-      clientID: {
+      clientId: {
         type: Number,
         default: 0
       }
@@ -21,7 +27,11 @@
     created() {
     },
     filters: {},
-    methods: {}
+    methods: {
+      goBack() {
+        this.$emit('changeView', {view: 'list'});
+      }
+    }
   };
 </script>
 <style scoped>

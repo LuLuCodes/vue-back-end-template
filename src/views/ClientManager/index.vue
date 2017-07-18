@@ -27,9 +27,9 @@
       edit
     },
     methods: {
-      changeView(view, {clientID} = {}) {
+      changeView({view, param = null}) {
         if (view === 'edit') {
-          this.clientID = clientID;
+          this.clientID = param.id;
         }
         this.currentView = view;
       }
