@@ -13,7 +13,7 @@
       </el-tab-pane>
       <el-tab-pane label="账户钱包">账户钱包</el-tab-pane>
       <el-tab-pane label="历史订单">历史订单</el-tab-pane>
-      <el-tab-pane label="历史订单">优惠券</el-tab-pane>
+      <el-tab-pane label="优惠券">优惠券</el-tab-pane>
     </el-tabs>
     
   </div>
