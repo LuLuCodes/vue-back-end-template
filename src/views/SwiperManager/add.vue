@@ -24,7 +24,7 @@
           </el-col>
         </el-form-item>
   
-        <el-form-item label="轮播图设置" prop="linkType">
+        <el-form-item label="轮播图设置" prop="image_uri">
           <el-col :span="24" >
             <crop-and-upload v-model="postForm.image_uri" :preview-size="{width: 720, height: 288}"></crop-and-upload>
           </el-col>
