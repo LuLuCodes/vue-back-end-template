@@ -8,27 +8,21 @@
               <el-input v-model="baseInfo.id" style="width: 150px;" size="small" :disabled="true"></el-input>
             </el-form-item>
           </el-col>
-  
+          
           <el-col :span="6">
             <el-form-item label="昵称/姓名：" prop="name">
               <el-input v-model="baseInfo.name" style="width: 190px;" size="small" :disabled="true"></el-input>
             </el-form-item>
           </el-col>
-  
+          
           <el-col :span="8">
             <el-form-item label="状态：" prop="status">
               <el-tag :type="baseInfo.status | statusFilter">{{baseInfo.status ? '启用' : '禁用'}}</el-tag>
             </el-form-item>
           </el-col>
         </el-row>
-  
+        
         <el-row>
-          <el-col :span="5">
-            <el-form-item label="手机号码：" prop="phone">
-              <el-input v-model="baseInfo.phone" style="width: 150px;" size="small" :disabled="true"></el-input>
-            </el-form-item>
-          </el-col>
-    
           <el-col :span="6">
             <el-form-item label="注册时间：" prop="timestamp">
               <el-date-picker
@@ -38,7 +32,7 @@
               </el-date-picker>
             </el-form-item>
           </el-col>
-  
+          
           <el-col :span="7">
             <el-form-item label="最后下单时间：" prop="ordertime">
               <el-date-picker
@@ -50,6 +44,37 @@
           </el-col>
         </el-row>
         
+        <el-row>
+          <el-col :span="5">
+            <el-form-item label="手机号码：" prop="phone">
+              <el-input v-model="baseInfo.phone" style="width: 150px;" size="small" :disabled="true"></el-input>
+            </el-form-item>
+          </el-col>
+          
+          <el-col :span="6">
+            <el-form-item label="客户地址：" prop="pcdCodes">
+              <el-cascader
+                :options="pcdList"
+                v-model="baseInfo.pcdCodes"
+                :disabled="true">
+              </el-cascader>
+            </el-form-item>
+          </el-col>
+        </el-row>
+  
+        <el-row>
+          <el-col :span="10">
+            <el-form-item label="详细地址：" prop="address">
+              <el-input
+                type="textarea"
+                :rows="2"
+                placeholder="请输入内容"
+                v-model="baseInfo.address" :disabled="true">
+              </el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+      
       </div>
     </el-form>
   </div>
@@ -62,7 +87,43 @@
     data() {
       return {
         infoLoading: false,
-        baseInfo: {}
+        baseInfo: {},
+        pcdList: [
+          {
+            value: 100001,
+            label: '浙江省',
+            children: [
+              {
+                value: 110001,
+                label: '杭州市',
+                children: [
+                  {
+                    value: 111001,
+                    label: '西湖区'
+                  },
+                  {
+                    value: 111002,
+                    label: '上城区'
+                  }
+                ]
+              },
+              {
+                value: 120001,
+                label: '嘉兴市',
+                children: [
+                  {
+                    value: 121001,
+                    label: '南湖区'
+                  },
+                  {
+                    value: 121002,
+                    label: '秀洲区'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       };
     },
     props: {
@@ -98,7 +159,8 @@
             name: 'leyi',
             head: 'http://img4.imgtn.bdimg.com/it/u=157241173,3207275343&fm=26&gp=0.jpg',
             phone: '13758087094',
-            pcdDes: '浙江省-嘉兴市-南湖区',
+            pcdDes: ['浙江省', '嘉兴市', '南湖区'],
+            pcdCodes: [100001, 120001, 121001],
             address: '富润路300号嘉兴麦云科技',
             timestamp: '2017-07-17 12:12:12',
             ordertime: '2017-07-17 12:12:12',
@@ -107,7 +169,8 @@
           this.infoLoading = false;
         }, 2000);
       },
-      goBack() {}
+      goBack() {
+      }
     }
   };
 </script>

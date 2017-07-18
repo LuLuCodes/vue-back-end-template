@@ -126,10 +126,15 @@
     
     <multi-select-good-list-dialog :selected-good-list ="goodMultiList" :show-dialog="showMultiSelectGoodListDialog" @closeDialog="showMultiSelectGoodListDialog = false" @submitSelectGood="submitMutliSelectGood"></multi-select-good-list-dialog>
     <single-select-good-dialog :show-dialog="showSingleSelectGoodDialogDialog" @closeDialog="showSingleSelectGoodDialogDialog = false" @submitSelectGood="submitSingleSelectGood"></single-select-good-dialog>
+  
+    <el-tooltip placement="top" content="回到顶部">
+      <back-to-top transitionName="fade" :visibilityHeight="300" :backPosition="50"></back-to-top>
+    </el-tooltip>
   </div>
 </template>
 
 <script>
+  import BackToTop from '../../components/BackToTop/index.vue';
   import Sticky from '../../components/Sticky/index.vue';
   import {CropAndUpload} from '../../components/ImageUpload';
   import {SingleSelectGoodDialog, MultiSelectGoodListDialog} from '../../components/GoodListDialog/index';
@@ -140,7 +145,8 @@
       Sticky,
       CropAndUpload,
       MultiSelectGoodListDialog,
-      SingleSelectGoodDialog
+      SingleSelectGoodDialog,
+      BackToTop
     },
     data() {
       return {
