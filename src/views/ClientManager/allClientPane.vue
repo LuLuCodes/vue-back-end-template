@@ -159,6 +159,7 @@
         this.getList();
       },
       handleFilter() {
+        this.getList();
       },
       handleDetail(client) {
         this.$emit('goToDetial', client.id);
