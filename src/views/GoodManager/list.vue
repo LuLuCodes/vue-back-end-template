@@ -100,7 +100,7 @@
     
     </div>
     
-    <el-table :data="list" v-loading="listLoading" element-loading-text="拼命加载中" height="580" border stripe fit
+    <el-table :data="list" v-loading="listLoading" element-loading-text="拼命加载中" :height="tableHeight" border stripe fit
               highlight-current-row style="width: 100%">
       <el-table-column align="center"
                        type="selection"
@@ -457,6 +457,7 @@
     name: 'GoodList',
     data() {
       return {
+        tableHeight: 0,
         list: null,
         total: null,
         listLoading: false,
@@ -513,6 +514,10 @@
       };
     },
     created() {
+      this.tableHeight = document.documentElement.clientHeight - (50 + 20 + 50 + 70);
+      $(window).resize(() => {
+        this.tableHeight = document.documentElement.clientHeight - (50 + 20 + 50 + 70);
+      });
       this.getList();
     },
     filters: {

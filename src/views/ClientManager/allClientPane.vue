@@ -22,8 +22,9 @@
       </el-row>
     </div>
     
-    <el-table :data="list" v-loading="listLoading" element-loading-text="拼命加载中" height="500" border fit highlight-current-row style="width: 100%"
-              :default-sort = "{prop: 'id', order: 'descending'}">
+    <el-table :data="list" v-loading="listLoading" element-loading-text="拼命加载中" :height="tableHeight" border fit
+              highlight-current-row style="width: 100%"
+              :default-sort="{prop: 'id', order: 'descending'}">
       <el-table-column align="center"
                        type="selection"
                        width="55">
@@ -37,11 +38,12 @@
       
       <el-table-column align="center" width="150" label="手机号" prop="phone" sortable>
       </el-table-column>
-  
+      
       <el-table-column align="center" width="150" label="账户余额" prop="money" sortable>
       </el-table-column>
       
-      <el-table-column align="center" label="状态" width="120" sortable prop="status" :filters="[{ text: '启用', value: 1 }, { text: '禁用', value: 0 }]"
+      <el-table-column align="center" label="状态" width="120" sortable prop="status"
+                       :filters="[{ text: '启用', value: 1 }, { text: '禁用', value: 0 }]"
                        :filter-method="filterStatus"
                        filter-placement="bottom-end">
         <template scope="scope">
@@ -129,6 +131,12 @@
       };
     },
     created() {
+      this.tableHeight = document.documentElement.clientHeight - (50 + 21 + 42 + 15 + 150);
+      console.log(this.tableHeight);
+      $(window).resize(() => {
+        this.tableHeight = document.documentElement.clientHeight - (50 + 21 + 42 + 15 + 150);
+        console.log(this.tableHeight);
+      });
       this.getList();
     },
     filters: {
