@@ -21,7 +21,7 @@
       </el-row>
     </div>
     
-    <el-table :data="list" v-loading="listLoading" element-loading-text="拼命加载中" height="500" border fit highlight-current-row style="width: 100%"
+    <el-table :data="list" v-loading="listLoading" element-loading-text="拼命加载中" :height="tableHeight" border fit highlight-current-row style="width: 100%"
               :default-sort = "{prop: 'id', order: 'descending'}">
       <el-table-column align="center"
                        type="selection"
@@ -113,6 +113,7 @@
     name: 'EnableClientPane',
     data() {
       return {
+        tableHeight: 0,
         list: null,
         total: null,
         listLoading: false,
@@ -126,6 +127,10 @@
       };
     },
     created() {
+      this.tableHeight = document.documentElement.clientHeight - (50 + 21 + 42 + 15 + 150);
+      $(window).resize(() => {
+        this.tableHeight = document.documentElement.clientHeight - (50 + 21 + 42 + 15 + 150);
+      });
       this.getList();
     },
     filters: {

@@ -118,6 +118,7 @@
     name: 'AllClientPane',
     data() {
       return {
+        tableHeight: 0,
         list: null,
         total: null,
         listLoading: false,
@@ -132,10 +133,8 @@
     },
     created() {
       this.tableHeight = document.documentElement.clientHeight - (50 + 21 + 42 + 15 + 150);
-      console.log(this.tableHeight);
       $(window).resize(() => {
         this.tableHeight = document.documentElement.clientHeight - (50 + 21 + 42 + 15 + 150);
-        console.log(this.tableHeight);
       });
       this.getList();
     },
