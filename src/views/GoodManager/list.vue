@@ -28,7 +28,8 @@
             ref="advancedSearchPopover"
             placement="top-start"
             width="1000"
-            trigger="click">
+            trigger="click"
+            v-model="showAdvancedSearchPopover">
             <el-form label-width="80px" label-position="right">
               <el-row>
                 <el-col :span="10">
@@ -72,7 +73,7 @@
               
               <el-form-item>
                 <el-button type="primary" size="small">确定</el-button>
-                <el-button size="small">取消</el-button>
+                <el-button size="small" @click="showAdvancedSearchPopover = false">取消</el-button>
               </el-form-item>
             </el-form>
           </el-popover>
@@ -488,7 +489,8 @@
         isIndeterminateTag: true,
         checkAllStatus: true,
         checkedStatuss: [0, 1],
-        isIndeterminateStatus: true
+        isIndeterminateStatus: false,
+        showAdvancedSearchPopover: false
       };
     },
     created() {
@@ -544,7 +546,7 @@
         this.checkedStatuss = event.target.checked ? statuss : [];
         this.isIndeterminateStatus = false;
       },
-      handleCheckedStatussChange(value) {
+      handleCheckedStatusChange(value) {
         let checkedCount = value.length;
         this.checkAllStatus = checkedCount === this.goodStatus.length;
         this.isIndeterminateStatus = checkedCount > 0 && checkedCount < this.goodStatus.length;
