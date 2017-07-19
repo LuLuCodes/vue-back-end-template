@@ -88,6 +88,22 @@
           </el-table-column>
         </el-table>
 
+        <!--商品图片-->
+        <h3>商品图片<span style="font-size: 12px;color: darkgrey;">最多20张，默认第一张图片作为主图，可以拖动图片调整</span></h3>
+        <el-upload
+          action="https://jsonplaceholder.typicode.com/posts/"
+          list-type="picture-card"
+          :on-preview="handlePictureCardPreview"
+          :on-remove="handlePictureRemove"
+          :before-upload="beforeAvatarUpload"
+          :on-success="handlePictureSuccess"
+          multiple>
+          <i class="el-icon-plus"></i>
+        </el-upload>
+        
+        <el-dialog v-model="showImagePreview" size="tiny">
+          <img width="100%" :src="previewImageUrl" alt="">
+        </el-dialog>
       </div>
     </el-form>
     
@@ -101,7 +117,8 @@
   import BackToTop from '../../components/BackToTop/index.vue';
   import Sticky from '../../components/Sticky/index.vue';
   import {CropAndUpload} from '../../components/ImageUpload';
-
+  import sortable from 'html5sortable';
+  
   export default {
     name: 'AddGood',
     components: {
@@ -171,7 +188,9 @@
         unitList: [{label: '件', value: 1}, {label: '袋', value: 0}],
         tags: [{id: 1, name: '新品上架'}, {id: 2, name: '热卖促销'}, {id: 3, name: '新客优惠'}],
         checkAllTag: true,
-        isIndeterminateTag: true
+        isIndeterminateTag: true,
+        showImagePreview: false,
+        previewImageUrl: ''
       };
     },
     computed: {},
@@ -200,6 +219,34 @@
       },
       addSku() {
         this.postForm.skus.push({name: '', stock: 0});
+      },
+      handlePictureRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePictureCardPreview(file) {
+        this.previewImageUrl = file.url;
+        this.showImagePreview = true;
+      },
+      beforeAvatarUpload(file) {
+//        const isJPG = file.type === 'image/jpeg';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+
+//        if (!isJPG) {
+//          this.$message.error('上传头像图片只能是 JPG 格式!');
+//        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+        return isLt2M;
+      },
+      handlePictureSuccess(response, file, fileList) {
+        this.$nextTick(() => {
+          sortable('.el-upload-list--picture-card', {
+            items: '.el-upload-list__item',
+            forcePlaceholderSize: true,
+            placeholderClass: 'my-sortable-placeholder'
+          });
+        });
       }
     }
   };
@@ -207,7 +254,6 @@
 
 <style rel="stylesheet/scss" lang="scss" scoped>
   @import "../../assets/css/mixin.scss";
-  
   .title-prompt {
     position: absolute;
     right: 0px;
@@ -220,6 +266,15 @@
     position: relative;
     .createPost-main-container {
       margin: 20px;
+      .my-sortable-placeholder{
+        width: 120px;
+        height: 120px;
+        border-radius: 0;
+        margin:0 8px 8px 0;
+        border:1px dashed #e1e1e1;
+        display:inline-block;
+      }
+      
       h3 {
         color: #03b8cc;
         font-size: inherit;
