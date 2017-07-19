@@ -7,7 +7,8 @@
     :close-on-press-escape="false"
     :close-on-click-modal="false"
     :before-close="handleClose">
-    <span>{{content}}</span>
+    <span v-if="content">{{content}}</span>
+    <slot></slot>
     <span slot="footer" class="dialog-footer">
       <el-button @click="cancel">取 消</el-button>
       <el-button type="primary" @click="confirm">确 定</el-button>

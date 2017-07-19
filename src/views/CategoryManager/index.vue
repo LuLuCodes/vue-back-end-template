@@ -9,7 +9,9 @@
       :render-content="renderContent">
     </el-tree>
     
-    <simple-confirm-dialog :content="confirmContent" :dialog-visible="dialogVisible"></simple-confirm-dialog>
+    <simple-confirm-dialog :content="confirmContent" :dialog-visible="dialogVisible">
+      <span style="color: red">{{'你确定要删除分类吗？'}}</span>
+    </simple-confirm-dialog>
   </div>
 </template>
 
@@ -91,7 +93,7 @@
       append() {},
       edit() {},
       remove(store, data) {
-        this.confirmContent = `你确定要删除分类${data.label}吗？`;
+        // this.confirmContent = `你确定要删除分类${data.label}吗？`;
         this.dialogVisible =true;
       }
     }
