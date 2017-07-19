@@ -49,26 +49,26 @@
               </el-row>
   
               <el-row>
-                <el-col :span="10">
+                <el-col :span="24">
                   <el-form-item label="商品标签">
-                    <el-checkbox size="small" :indeterminate="isIndeterminate" v-model="checkAllTag" @change="handleCheckAllTagChange">全选</el-checkbox>
-                    <el-checkbox-group v-model="checkedTags" @change="handleCheckedTagsChange">
+                    <el-checkbox size="small" :indeterminate="isIndeterminateTag" v-model="checkAllTag" @change="handleCheckAllTagChange">全选</el-checkbox>
+                    <el-checkbox-group v-model="checkedTags" @change="handleCheckedTagsChange" style="display: inline-block;margin-left: 15px;">
                       <el-checkbox size="small" v-for="tag in tags" :label="tag.id" :key="tag.id">{{tag.name}}</el-checkbox>
                     </el-checkbox-group>
                   </el-form-item>
                 </el-col>
-                <el-col :span="12">
-                  <el-form-item label="商品分类">
-                    <el-cascader
-                      expand-trigger="hover"
-                      :options="data2"
-                      :show-all-levels="false"
-                      size="small">
-                    </el-cascader>
+              </el-row>
+  
+              <el-row>
+                <el-col :span="24">
+                  <el-form-item label="商品状态">
+                    <el-checkbox size="small" :indeterminate="isIndeterminateStatus" v-model="checkAllStatus" @change="handleCheckAllStatusChange">全选</el-checkbox>
+                    <el-checkbox-group v-model="checkedStatuss" @change="handleCheckedStatusChange" style="display: inline-block;margin-left: 15px;">
+                      <el-checkbox size="small" v-for="status in goodStatus" :label="status.value" :key="status.value">{{status.label}}</el-checkbox>
+                    </el-checkbox-group>
                   </el-form-item>
                 </el-col>
               </el-row>
-              
               
               <el-form-item>
                 <el-button type="primary" size="small">确定</el-button>
@@ -485,7 +485,10 @@
         checkAllTag: true,
         checkedTags: [1, 2],
         tags: tags,
-        isIndeterminate: true
+        isIndeterminateTag: true,
+        checkAllStatus: true,
+        checkedStatuss: [0, 1],
+        isIndeterminateStatus: true
       };
     },
     created() {
@@ -526,12 +529,25 @@
           tags.push(tag.id);
         }
         this.checkedTags = event.target.checked ? tags : [];
-        this.isIndeterminate = false;
+        this.isIndeterminateTag = false;
       },
       handleCheckedTagsChange(value) {
         let checkedCount = value.length;
         this.checkAllTag = checkedCount === this.tags.length;
-        this.isIndeterminate = checkedCount > 0 && checkedCount < this.tags.length;
+        this.isIndeterminateTag = checkedCount > 0 && checkedCount < this.tags.length;
+      },
+      handleCheckAllStatusChange(event) {
+        let statuss = [];
+        for (let tag of this.goodStatus) {
+          statuss.push(tag.value);
+        }
+        this.checkedStatuss = event.target.checked ? statuss : [];
+        this.isIndeterminateStatus = false;
+      },
+      handleCheckedStatussChange(value) {
+        let checkedCount = value.length;
+        this.checkAllStatus = checkedCount === this.goodStatus.length;
+        this.isIndeterminateStatus = checkedCount > 0 && checkedCount < this.goodStatus.length;
       },
       handleCreate() {
         this.$emit('changeView', 'add');
