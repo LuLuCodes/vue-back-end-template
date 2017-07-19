@@ -82,7 +82,7 @@
 
 <script>
   export default {
-    name: 'baseInfoPane',
+    name: 'BaseInfoPane',
     components: {},
     data() {
       return {

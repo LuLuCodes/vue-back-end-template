@@ -35,7 +35,7 @@
   import DisableClientPane from './disableClientPane.vue';
 
   export default {
-    name: 'client-list',
+    name: 'ClientList',
     data() {
       return {
         allClientCount: 0,

@@ -76,7 +76,7 @@
   ];
   
   export default {
-    name: 'deliveryAddressPane',
+    name: 'DeliveryAddressPane',
     components: {},
     data() {
       return {

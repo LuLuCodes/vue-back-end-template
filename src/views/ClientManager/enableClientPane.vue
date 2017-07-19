@@ -110,7 +110,7 @@
     {id: 100030, name: 'leyi', timestamp: '2017-07-17 12:12:12', status: 1, phone: '13758087094', money: '20.4'}
   ];
   export default {
-    name: 'enableClientPane',
+    name: 'EnableClientPane',
     data() {
       return {
         list: null,

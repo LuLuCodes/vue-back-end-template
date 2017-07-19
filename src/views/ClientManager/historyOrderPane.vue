@@ -111,7 +111,7 @@
   ];
 
   export default {
-    name: 'historyOrderPane',
+    name: 'HistoryOrderPane',
     components: {},
     data() {
       return {

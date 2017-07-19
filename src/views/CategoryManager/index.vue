@@ -39,7 +39,7 @@
   import {SimpleConfirmDialog} from '../../components/ConfirmDialog';
   
   export default {
-    name: '',
+    name: 'CategoryManager',
     components: {
       SimpleConfirmDialog
     },

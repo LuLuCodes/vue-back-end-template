@@ -15,7 +15,7 @@
   import edit from './edit.vue';
 
   export default {
-    name: 'client-manager',
+    name: 'ClientManager',
     data() {
       return {
         currentView: 'list',

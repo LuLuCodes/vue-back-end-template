@@ -14,7 +14,7 @@
   import { Navbar, Sidebar, AppMain } from '../Layout';
 
   export default {
-    name: 'layout',
+    name: 'Layout',
     components: {
       Navbar,
       Sidebar,

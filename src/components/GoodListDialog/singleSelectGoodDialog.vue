@@ -336,7 +336,7 @@
   ];
 
   export default {
-    name: 'singleSelectGoodDialog',
+    name: 'SingleSelectGoodDialog',
     components: {},
     props: {
       showDialog: {

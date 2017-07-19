@@ -24,7 +24,7 @@
 <script>
   export default {
     components: { },
-    name: 'login',
+    name: 'Login',
     data() {
       const validateAccount = (rule, value, callback) => {
         if (!value) {

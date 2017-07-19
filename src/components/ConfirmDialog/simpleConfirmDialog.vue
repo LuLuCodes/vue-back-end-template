@@ -18,7 +18,7 @@
 
 <script>
   export default {
-    name: '',
+    name: 'SimpleConfirmDialog',
     components: {},
     data() {
       return {};

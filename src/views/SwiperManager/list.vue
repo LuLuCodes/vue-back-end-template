@@ -129,7 +129,7 @@
   ];
 
   export default {
-    name: 'swiper-list',
+    name: 'SwiperList',
     data() {
       return {
         list: null,

@@ -28,7 +28,7 @@
   import HistoryOrderPane from './historyOrderPane.vue';
   
   export default {
-    name: '',
+    name: 'ClientManagerEdit',
     components: {
       Sticky,
       BaseInfoPane,

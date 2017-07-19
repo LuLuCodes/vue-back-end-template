@@ -12,9 +12,10 @@
 
 <script>
   import list from './list.vue';
+  import add from './add.vue';
 
   export default {
-    name: 'goodManager',
+    name: 'GoodManager',
     data() {
       return {
         currentView: 'list',
@@ -22,7 +23,8 @@
       };
     },
     components: {
-      list
+      list,
+      add
     },
     methods: {
       changeView({view, param = null}) {

@@ -441,7 +441,7 @@
 
   export default {
     components: {},
-    name: 'good-list',
+    name: 'GoodList',
     data() {
       return {
         list: null,

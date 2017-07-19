@@ -27,7 +27,7 @@
   import VueCoreImageUpload from 'vue-core-image-upload';
   
   export default {
-    name: 'cropAndUpload',
+    name: 'CropAndUpload',
     components: {
       VueCoreImageUpload
     },

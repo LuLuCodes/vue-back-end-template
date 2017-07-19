@@ -36,7 +36,7 @@
   import orderChart from './orderChart.vue';
   import visitorChart from './visitorChart.vue';
   export default {
-    name: 'dashboard',
+    name: 'Dashboard',
     components: { moneyChart, visitorChart, orderChart },
     data() {
       return {

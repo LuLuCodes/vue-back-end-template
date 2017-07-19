@@ -14,7 +14,7 @@
 
 <script>
   export default {
-    name: 'hamburger',
+    name: 'Hamburger',
     props: {
       isActive: {
         type: Boolean,

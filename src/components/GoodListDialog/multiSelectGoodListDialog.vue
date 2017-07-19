@@ -342,7 +342,7 @@
   ];
 
   export default {
-    name: 'multiSelectGoodListDialog',
+    name: 'MultiSelectGoodListDialog',
     components: {},
     props: {
       showDialog: {

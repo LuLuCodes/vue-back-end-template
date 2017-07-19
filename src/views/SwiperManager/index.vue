@@ -15,7 +15,7 @@
   import add from './add.vue';
 
   export default {
-    name: 'swiper-manager',
+    name: 'SwiperManager',
     data() {
       return {
         currentView: 'list'
