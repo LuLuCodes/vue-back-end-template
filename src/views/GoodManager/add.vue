@@ -9,18 +9,20 @@
       </sticky>
       
       <div class="createPost-main-container">
+        <!--基础信息-->
         <h3>基础信息</h3>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="商品名称" prop="categoryId">
-              <el-input v-model="postForm.categoryId" size="small"></el-input>
+            <el-form-item label="商品名称" prop="name">
+              <el-input v-model="postForm.name" size="small"></el-input>
             </el-form-item>
           </el-col>
           
           
           <el-col :span="10" :push="1">
-            <el-form-item label="商品分类" prop="name">
+            <el-form-item label="商品分类" prop="categoryId">
               <el-cascader
+                v-model="postForm.categoryId"
                 expand-trigger="hover"
                 :options="data2"
                 :show-all-levels="false"
@@ -43,20 +45,49 @@
               </el-select>
             </el-form-item>
           </el-col>
-    
-    
-          <el-col :span="10" :push="1">
-            <el-form-item label="商品分类" prop="name">
-              <el-cascader
-                expand-trigger="hover"
-                :options="data2"
-                :show-all-levels="false"
-                size="small">
-              </el-cascader>
+        </el-row>
+  
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="商品标签" prop="tags">
+              <el-checkbox size="small" :indeterminate="isIndeterminateTag" v-model="checkAllTag"
+                           @change="handleCheckAllTagChange">全选
+              </el-checkbox>
+              <el-checkbox-group v-model="postForm.tags" @change="handleCheckedTagsChange"
+                                 style="display: inline-block;margin-left: 15px;">
+                <el-checkbox size="small" v-for="tag in tags" :label="tag.id" :key="tag.id">{{tag.name}}
+                </el-checkbox>
+              </el-checkbox-group>
             </el-form-item>
           </el-col>
         </el-row>
-      
+  
+        <!--商品规格-->
+        <h3>商品规格</h3>
+        <div class="filter-container">
+          <el-button size="small" type="success" icon="plus" @click="addSku">新增</el-button>
+        </div>
+        <el-table :data="postForm.skus" border fit highlight-current-row style="width: 100%">
+          <el-table-column align="center" min-width="300px" label="规格名称">
+            <template scope="scope">
+              <el-input size="small" v-model="scope.row.name"></el-input>
+            </template>
+          </el-table-column>
+  
+          <el-table-column align="center" width="300px" label="库存">
+            <template scope="scope">
+              <el-input-number size="small" v-model="scope.row.stock" :min="1"></el-input-number>
+              <el-checkbox size="small">无限库存</el-checkbox>
+            </template>
+          </el-table-column>
+    
+          <el-table-column align="center" label="操作" width="120">
+            <template scope="scope">
+              <el-button size="small" type="danger" icon="delete">删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+
       </div>
     </el-form>
     
@@ -84,7 +115,8 @@
           name: '',
           categoryId: undefined,
           unitId: undefined,
-          tags: []
+          tags: [],
+          skus: []
         },
         rules: {
           name: [
@@ -95,6 +127,9 @@
           ],
           unitId: [
             {required: true, message: '请选择商品单位', trigger: 'blur'}
+          ],
+          skus: [
+            {required: true, message: '请设置商品单位', trigger: 'blur'}
           ]
         },
         loading: false,
@@ -133,7 +168,10 @@
             label: '二级 3-2'
           }]
         }],
-        unitList: [{label: '件', value: 1}, {label: '袋', value: 0}]
+        unitList: [{label: '件', value: 1}, {label: '袋', value: 0}],
+        tags: [{id: 1, name: '新品上架'}, {id: 2, name: '热卖促销'}, {id: 3, name: '新客优惠'}],
+        checkAllTag: true,
+        isIndeterminateTag: true
       };
     },
     computed: {},
@@ -146,6 +184,22 @@
       },
       cancel() {
         this.$emit('changeView', {view: 'list'});
+      },
+      handleCheckAllTagChange(event) {
+        let tags = [];
+        for (let tag of this.tags) {
+          tags.push(tag.id);
+        }
+        this.postForm.tags = event.target.checked ? tags : [];
+        this.isIndeterminateTag = false;
+      },
+      handleCheckedTagsChange(value) {
+        let checkedCount = value.length;
+        this.checkAllTag = checkedCount === this.tags.length;
+        this.isIndeterminateTag = checkedCount > 0 && checkedCount < this.tags.length;
+      },
+      addSku() {
+        this.postForm.skus.push({name: '', stock: 0});
       }
     }
   };
