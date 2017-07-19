@@ -32,7 +32,8 @@
     "vue-multiselect": "^2.0.2",
     "vue-router": "^2.2.0",
     "vuedraggable": "^2.14.1",
-    "vuex": "^2.2.1"
+    "vuex": "^2.2.1",
+    "wangeditor": "^3.0.4"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",

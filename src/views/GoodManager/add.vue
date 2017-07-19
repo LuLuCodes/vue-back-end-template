@@ -61,7 +61,7 @@
             </el-form-item>
           </el-col>
         </el-row>
-  
+        
         <!--商品规格-->
         <h3>商品规格</h3>
         <div class="filter-container">
@@ -74,6 +74,12 @@
             </template>
           </el-table-column>
   
+          <el-table-column align="center" width="200px" label="价格">
+            <template scope="scope">
+              <el-input-number :controls="false" size="small" v-model="scope.row.price" :min="1"></el-input-number>
+            </template>
+          </el-table-column>
+          
           <el-table-column align="center" width="300px" label="库存">
             <template scope="scope">
               <el-input-number size="small" v-model="scope.row.stock" :min="1"></el-input-number>
@@ -87,7 +93,7 @@
             </template>
           </el-table-column>
         </el-table>
-
+  
         <!--商品图片-->
         <h3>商品图片<span style="font-size: 12px;color: darkgrey;">最多20张，默认第一张图片作为主图，可以拖动图片调整</span></h3>
         <el-upload
@@ -100,10 +106,16 @@
           multiple>
           <i class="el-icon-plus"></i>
         </el-upload>
-        
+  
         <el-dialog v-model="showImagePreview" size="tiny">
           <img width="100%" :src="previewImageUrl" alt="">
         </el-dialog>
+  
+        <!--商品详情-->
+        <h3>商品详情</h3>
+        <div id="editor">
+          <p>请在此编辑商品详情</p>
+        </div>
       </div>
     </el-form>
     
@@ -118,6 +130,7 @@
   import Sticky from '../../components/Sticky/index.vue';
   import {CropAndUpload} from '../../components/ImageUpload';
   import sortable from 'html5sortable';
+  import wangeditor from 'wangeditor';
   
   export default {
     name: 'AddGood',
@@ -128,6 +141,7 @@
     },
     data() {
       return {
+        editor: undefined,
         postForm: {
           name: '',
           categoryId: undefined,
@@ -196,6 +210,10 @@
     computed: {},
     created() {
     },
+    mounted() {
+      this.editor = new wangeditor('#editor');
+      this.editor.create();
+    },
     filters: {},
     methods: {
       submitForm() {
@@ -218,7 +236,7 @@
         this.isIndeterminateTag = checkedCount > 0 && checkedCount < this.tags.length;
       },
       addSku() {
-        this.postForm.skus.push({name: '', stock: 0});
+        this.postForm.skus.push({name: '', stock: 1, price: 1});
       },
       handlePictureRemove(file, fileList) {
         console.log(file, fileList);

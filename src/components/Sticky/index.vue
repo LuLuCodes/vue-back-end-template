@@ -17,7 +17,7 @@
         },
         zIndex: {
           type: Number,
-          default: 1
+          default: 2000
         },
         className: {
           type: String
