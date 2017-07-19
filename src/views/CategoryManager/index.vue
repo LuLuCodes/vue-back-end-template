@@ -3,13 +3,33 @@
     <el-tree
       :data="data2"
       :props="defaultProps"
-      node-key="id"
+      node-key="value"
       default-expand-all
       :expand-on-click-node="false"
       :render-content="renderContent">
     </el-tree>
+  
+    <el-dialog :title="isNewCategoryDialog? '新增分类':'编辑分类'" :visible.sync="showNewOrEditDialog">
+      <el-form :model="category">
+        <el-form-item label="分类名称" label-width="120px">
+          <el-input v-model="category.name" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="上级分类" label-width="120px">
+          <el-cascader
+            expand-trigger="hover"
+            :options="data2"
+            v-model="category.parent"
+            @change="handleChange">
+          </el-cascader>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="showNewOrEditDialog = false">取 消</el-button>
+        <el-button type="primary" @click="showNewOrEditDialog = false">确 定</el-button>
+      </div>
+    </el-dialog>
     
-    <simple-confirm-dialog :content="confirmContent" :dialog-visible="dialogVisible">
+    <simple-confirm-dialog :content="confirmContent" :dialog-visible="showConfrmDialog">
       <span style="color: red">{{'你确定要删除分类吗？'}}</span>
     </simple-confirm-dialog>
   </div>
@@ -25,40 +45,46 @@
     },
     data() {
       return {
+        category: {
+          name: '',
+          parent: undefined
+        },
+        isNewCategoryDialog: false,
         confirmContent: '',
-        dialogVisible: false,
+        showNewOrEditDialog: false,
+        showConfrmDialog: false,
         data2: [{
-          id: 1,
+          value: 1,
           label: '一级 1',
           children: [{
-            id: 4,
+            value: 4,
             label: '二级 1-1',
             children: [{
-              id: 9,
+              value: 9,
               label: '三级 1-1-1'
             }, {
-              id: 10,
+              value: 10,
               label: '三级 1-1-2'
             }]
           }]
         }, {
-          id: 2,
+          value: 2,
           label: '一级 2',
           children: [{
-            id: 5,
+            value: 5,
             label: '二级 2-1'
           }, {
-            id: 6,
+            value: 6,
             label: '二级 2-2'
           }]
         }, {
-          id: 3,
+          value: 3,
           label: '一级 3',
           children: [{
-            id: 7,
+            value: 7,
             label: '二级 3-1'
           }, {
-            id: 8,
+            value: 8,
             label: '二级 3-2'
           }]
         }],
@@ -90,11 +116,17 @@
           </span>
         );
       },
-      append() {},
-      edit() {},
+      append() {
+        this.isNewCategoryDialog = true;
+        this.showNewOrEditDialog = true;
+      },
+      edit() {
+        this.isNewCategoryDialog = false;
+        this.showNewOrEditDialog = true;
+      },
       remove(store, data) {
         // this.confirmContent = `你确定要删除分类${data.label}吗？`;
-        this.dialogVisible =true;
+        this.showConfrmDialog =true;
       }
     }
   };
