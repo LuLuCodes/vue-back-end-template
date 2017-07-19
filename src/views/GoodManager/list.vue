@@ -104,10 +104,10 @@
         </template>
       </el-table-column>
       
-      <el-table-column align="center" width="100px" label="商品编码" prop="id">
+      <el-table-column align="center" width="120px" label="商品编码" prop="id" sortable>
       </el-table-column>
       
-      <el-table-column align="center" min-width="200px" label="商品名称">
+      <el-table-column align="center" min-width="200px" label="商品名称" sortable>
         <template scope="scope">
           <span class="link-type" @click="handleUpdate(scope.row)">{{scope.row.title}}</span>
         </template>
@@ -119,19 +119,19 @@
       <el-table-column align="center" width="80px" label="单位" prop="unit">
       </el-table-column>
       
-      <el-table-column align="center" width="100px" label="市场价" prop="marketPrice">
+      <el-table-column align="center" width="100px" label="市场价" prop="marketPrice" sortable>
       </el-table-column>
       
-      <el-table-column align="center" width="100px" label="成本价" prop="costPrice">
+      <el-table-column align="center" width="100px" label="成本价" prop="costPrice" sortable>
       </el-table-column>
       
-      <el-table-column align="center" width="100px" label="库存" prop="stock">
+      <el-table-column align="center" width="100px" label="库存" prop="stock" sortable>
       </el-table-column>
       
-      <el-table-column align="center" width="150px" label="新增时间" prop="createTime">
+      <el-table-column align="center" width="150px" label="新增时间" prop="createTime" sortable>
       </el-table-column>
       
-      <el-table-column align="center" width="150px" label="修改时间" prop="modifyTime">
+      <el-table-column align="center" width="150px" label="修改时间" prop="modifyTime" sortable>
       </el-table-column>
       
       <el-table-column align="center" label="状态" width="100">
