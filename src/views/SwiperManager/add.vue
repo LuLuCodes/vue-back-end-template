@@ -1,6 +1,6 @@
 <template>
   <div class="createPost-container">
-    <el-form class="form-container" :model="postForm" :rules="rules" ref="postForm">
+    <el-form class="form-container" :model="postForm" :rules="rules" ref="postForm" label-width="100px" label-position="right">
       <sticky :className="'sub-navbar published'">
         <el-button v-loading="loading" style="margin-left: 10px;" type="success" @click="submitForm()">保存
         </el-button>
@@ -140,7 +140,7 @@
   import {SingleSelectGoodDialog, MultiSelectGoodListDialog} from '../../components/GoodListDialog/index';
   
   export default {
-    name: 'AddWwiper',
+    name: 'AddSwiper',
     components: {
       Sticky,
       CropAndUpload,

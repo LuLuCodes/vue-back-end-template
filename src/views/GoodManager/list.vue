@@ -14,12 +14,12 @@
           <el-input @keyup.enter.native="handleFilter" style="width: 230px;" class="filter-item"
                     placeholder="请输入商品名称/编码/规格/关键字" v-model="listQuery.title" size="small">
           </el-input>
-  
+          
           <el-cascader class="filter-item"
-            expand-trigger="hover"
-            :options="data2"
-            :show-all-levels="false"
-            size="small">
+                       expand-trigger="hover"
+                       :options="data2"
+                       :show-all-levels="false"
+                       size="small">
           </el-cascader>
           <el-select clearable style="width: 100px" class="filter-item" v-model="listQuery.status" placeholder="状态"
                      size="small">
@@ -54,24 +54,33 @@
                   </el-form-item>
                 </el-col>
               </el-row>
-  
+              
               <el-row>
                 <el-col :span="24">
                   <el-form-item label="商品标签">
-                    <el-checkbox size="small" :indeterminate="isIndeterminateTag" v-model="checkAllTag" @change="handleCheckAllTagChange">全选</el-checkbox>
-                    <el-checkbox-group v-model="checkedTags" @change="handleCheckedTagsChange" style="display: inline-block;margin-left: 15px;">
-                      <el-checkbox size="small" v-for="tag in tags" :label="tag.id" :key="tag.id">{{tag.name}}</el-checkbox>
+                    <el-checkbox size="small" :indeterminate="isIndeterminateTag" v-model="checkAllTag"
+                                 @change="handleCheckAllTagChange">全选
+                    </el-checkbox>
+                    <el-checkbox-group v-model="checkedTags" @change="handleCheckedTagsChange"
+                                       style="display: inline-block;margin-left: 15px;">
+                      <el-checkbox size="small" v-for="tag in tags" :label="tag.id" :key="tag.id">{{tag.name}}
+                      </el-checkbox>
                     </el-checkbox-group>
                   </el-form-item>
                 </el-col>
               </el-row>
-  
+              
               <el-row>
                 <el-col :span="24">
                   <el-form-item label="商品状态">
-                    <el-checkbox size="small" :indeterminate="isIndeterminateStatus" v-model="checkAllStatus" @change="handleCheckAllStatusChange">全选</el-checkbox>
-                    <el-checkbox-group v-model="checkedStatuss" @change="handleCheckedStatusChange" style="display: inline-block;margin-left: 15px;">
-                      <el-checkbox size="small" v-for="status in goodStatus" :label="status.value" :key="status.value">{{status.label}}</el-checkbox>
+                    <el-checkbox size="small" :indeterminate="isIndeterminateStatus" v-model="checkAllStatus"
+                                 @change="handleCheckAllStatusChange">全选
+                    </el-checkbox>
+                    <el-checkbox-group v-model="checkedStatuss" @change="handleCheckedStatusChange"
+                                       style="display: inline-block;margin-left: 15px;">
+                      <el-checkbox size="small" v-for="status in goodStatus" :label="status.value" :key="status.value">
+                        {{status.label}}
+                      </el-checkbox>
                     </el-checkbox-group>
                   </el-form-item>
                 </el-col>
@@ -157,6 +166,10 @@
             <el-row style="margin-bottom: 3px;">
               <el-button v-if="scope.row.status === 1" size="small" type="warning"
                          @click="handleModifyStatus(scope.row, 0)">下架
+              </el-button>
+            </el-row>
+            <el-row style="margin-bottom: 3px;">
+              <el-button size="small" type="info">编辑
               </el-button>
             </el-row>
             <el-row style="margin-bottom: 3px;">
@@ -558,7 +571,7 @@
         this.isIndeterminateStatus = checkedCount > 0 && checkedCount < this.goodStatus.length;
       },
       handleCreate() {
-        this.$emit('changeView', 'add');
+        this.$emit('changeView', {view: 'add'});
       }
     }
   };

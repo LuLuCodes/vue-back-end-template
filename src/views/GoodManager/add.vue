@@ -1,6 +1,7 @@
 <template>
   <div class="createPost-container">
-    <el-form class="form-container" :model="postForm" :rules="rules" ref="postForm">
+    <el-form class="form-container" :model="postForm" :rules="rules" ref="postForm" label-width="80px"
+             label-position="right">
       <sticky :className="'sub-navbar published'">
         <el-button v-loading="loading" style="margin-left: 10px;" type="success" @click="submitForm()">保存
         </el-button>
@@ -8,124 +9,56 @@
       </sticky>
       
       <div class="createPost-main-container">
-        <el-form-item label="轮播图名称" prop="name">
-          <el-col :span="11">
-            <el-input v-model="postForm.name"></el-input>
+        <h3>基础信息</h3>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="商品名称" prop="categoryId">
+              <el-input v-model="postForm.categoryId" size="small"></el-input>
+            </el-form-item>
           </el-col>
-        </el-form-item>
-        
-        <el-form-item label="轮播图链接" prop="linkType">
-          <el-col :span="11" >
-            <el-select v-model="postForm.linkType" placeholder="请选择轮播图链接类型"  >
-              <el-option label="列表广告" :value="1"></el-option>
-              <el-option label="单品广告" :value="2"></el-option>
-              <el-option label="外部链接" :value="3"></el-option>
-            </el-select>
+          
+          
+          <el-col :span="10" :push="1">
+            <el-form-item label="商品分类" prop="name">
+              <el-cascader
+                expand-trigger="hover"
+                :options="data2"
+                :show-all-levels="false"
+                size="small">
+              </el-cascader>
+            </el-form-item>
           </el-col>
-        </el-form-item>
-        
-        <el-form-item label="轮播图设置" prop="image_uri">
-          <el-col :span="24" >
-            <crop-and-upload v-model="postForm.image_uri" :preview-size="{width: 720, height: 288}"></crop-and-upload>
+        </el-row>
+  
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="计量单位" prop="unitId">
+              <el-select v-model="postForm.unitId" clearable placeholder="请选择" size="small">
+                <el-option
+                  v-for="item in unitList"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
           </el-col>
-        </el-form-item>
+    
+    
+          <el-col :span="10" :push="1">
+            <el-form-item label="商品分类" prop="name">
+              <el-cascader
+                expand-trigger="hover"
+                :options="data2"
+                :show-all-levels="false"
+                size="small">
+              </el-cascader>
+            </el-form-item>
+          </el-col>
+        </el-row>
       
       </div>
     </el-form>
-    
-    <el-tabs v-show="postForm.linkType === 1" type="border-card" style="margin: 20px;">
-      <el-tab-pane label="多个商品选择">
-        <div class="filter-container">
-          <el-row>
-            <el-col :span="12">
-              <el-button-group>
-                <el-button size="small" type="success" icon="plus" @click="showMultiSelectGoodListDialog = true">新增</el-button>
-                <el-button size="small" type="danger" icon="delete">删除</el-button>
-              </el-button-group>
-            </el-col>
-          </el-row>
-          
-          <el-table :data="goodMultiList" height="400" fit highlight-current-row style="width: 100%;margin-top: 10px;">
-            <el-table-column  align="center"
-                              type="selection"
-                              width="55">
-            </el-table-column>
-            
-            <el-table-column align="center" width="120" label="商品主图">
-              <template scope="scope">
-                <img :src="scope.row.url" style="width: 120px;height: 100px;padding-top: 5px;"/>
-              </template>
-            </el-table-column>
-            
-            <el-table-column align="center" min-width="200" label="商品名称">
-              <template scope="scope">
-                <span class="link-type">{{scope.row.title}}</span>
-              </template>
-            </el-table-column>
-            
-            <el-table-column align="center" width="200" label="商品编码">
-              <template scope="scope">
-                <span class="link-type">{{scope.row.id}}</span>
-              </template>
-            </el-table-column>
-            
-            <el-table-column align="center" label="状态" width="100">
-              <template scope="scope">
-                <el-tag :type="scope.row.status | statusFilter">{{scope.row.status ? '可售':'停售'}}</el-tag>
-              </template>
-            </el-table-column>
-          </el-table>
-        </div>
-      </el-tab-pane>
-    </el-tabs>
-    
-    <el-tabs v-show="postForm.linkType === 2" type="border-card" style="margin: 20px;">
-      <el-tab-pane label="单个商品选择">
-        <div class="filter-container">
-          <el-row>
-            <el-col :span="12">
-              <el-button-group>
-                <el-button size="small" type="success" icon="plus" @click="showSingleSelectGoodDialogDialog = true">新增</el-button>
-                <el-button size="small" type="danger" icon="delete">删除</el-button>
-              </el-button-group>
-            </el-col>
-          </el-row>
-          
-          <el-table :data="goodSingleList" height="400" fit highlight-current-row style="width: 100%;margin-top: 10px;">
-            <el-table-column align="center" width="120" label="商品主图">
-              <template scope="scope">
-                <img :src="scope.row.url" style="width: 120px;height: 100px;padding-top: 5px;"/>
-              </template>
-            </el-table-column>
-            
-            <el-table-column align="center" min-width="200" label="商品名称">
-              <template scope="scope">
-                <span class="link-type">{{scope.row.title}}</span>
-              </template>
-            </el-table-column>
-            
-            <el-table-column align="center" width="200" label="商品编码">
-              <template scope="scope">
-                <span class="link-type">{{scope.row.id}}</span>
-              </template>
-            </el-table-column>
-            
-            <el-table-column align="center" label="状态" width="100">
-              <template scope="scope">
-                <el-tag :type="scope.row.status | statusFilter">{{scope.row.status ? '可售':'停售'}}</el-tag>
-              </template>
-            </el-table-column>
-          </el-table>
-        </div>
-      </el-tab-pane>
-    </el-tabs>
-    
-    <el-tabs v-show="postForm.linkType === 3" type="border-card" style="margin: 20px;">
-      <el-tab-pane label="外部链接">外部链接</el-tab-pane>
-    </el-tabs>
-    
-    <multi-select-good-list-dialog :selected-good-list ="goodMultiList" :show-dialog="showMultiSelectGoodListDialog" @closeDialog="showMultiSelectGoodListDialog = false" @submitSelectGood="submitMutliSelectGood"></multi-select-good-list-dialog>
-    <single-select-good-dialog :show-dialog="showSingleSelectGoodDialogDialog" @closeDialog="showSingleSelectGoodDialogDialog = false" @submitSelectGood="submitSingleSelectGood"></single-select-good-dialog>
     
     <el-tooltip placement="top" content="回到顶部">
       <back-to-top transitionName="fade" :visibilityHeight="300" :backPosition="50"></back-to-top>
@@ -137,68 +70,87 @@
   import BackToTop from '../../components/BackToTop/index.vue';
   import Sticky from '../../components/Sticky/index.vue';
   import {CropAndUpload} from '../../components/ImageUpload';
-  import {SingleSelectGoodDialog, MultiSelectGoodListDialog} from '../../components/GoodListDialog/index';
 
   export default {
     name: 'AddGood',
     components: {
       Sticky,
       CropAndUpload,
-      MultiSelectGoodListDialog,
-      SingleSelectGoodDialog,
       BackToTop
     },
     data() {
       return {
-        showMultiSelectGoodListDialog: false,
-        showSingleSelectGoodDialogDialog: false,
-        goodMultiList: [],
-        goodSingleList: [],
         postForm: {
           name: '',
-          linkType: 1,
-          image_uri: ''
+          categoryId: undefined,
+          unitId: undefined,
+          tags: []
         },
         rules: {
           name: [
-            { required: true, message: '请输入轮播图名称', trigger: 'blur' },
-            { min: 5, max: 20, message: '长度在 5 到 20 个字符', trigger: 'blur' }
+            {required: true, message: '请输入商品名称', trigger: 'blur'}
           ],
-          linkType: [
-            { required: true, message: '请选择轮播图链接类型', trigger: 'blur' }
+          categoryId: [
+            {required: true, message: '请选择商品分类', trigger: 'blur'}
           ],
-          image_uri: [
-            { required: true, message: '请设置轮播图', trigger: 'blur' }
+          unitId: [
+            {required: true, message: '请选择商品单位', trigger: 'blur'}
           ]
         },
-        loading: false
+        loading: false,
+        data2: [{
+          value: 1,
+          label: '一级 1',
+          children: [{
+            value: 4,
+            label: '二级 1-1',
+            children: [{
+              value: 9,
+              label: '三级 1-1-1'
+            }, {
+              value: 10,
+              label: '三级 1-1-2'
+            }]
+          }]
+        }, {
+          value: 2,
+          label: '一级 2',
+          children: [{
+            value: 5,
+            label: '二级 2-1'
+          }, {
+            value: 6,
+            label: '二级 2-2'
+          }]
+        }, {
+          value: 3,
+          label: '一级 3',
+          children: [{
+            value: 7,
+            label: '二级 3-1'
+          }, {
+            value: 8,
+            label: '二级 3-2'
+          }]
+        }],
+        unitList: [{label: '件', value: 1}, {label: '袋', value: 0}]
       };
     },
     computed: {},
     created() {
     },
-    filters: {
-      statusFilter(status) {
-        const statusMap = ['danger', 'success'];
-        return statusMap[status];
-      }
-    },
+    filters: {},
     methods: {
       submitForm() {
-        this.$emit('changeView', 'list');
+        this.$emit('changeView', {view: 'list'});
       },
       cancel() {
-        this.$emit('changeView', 'list');
-      },
-      submitMutliSelectGood(selectGoodList) {
-        this.goodMultiList.splice(0, this.goodMultiList.length, ...selectGoodList);
-      },
-      submitSingleSelectGood(selectGood) {
-        this.goodSingleList.splice(0, this.goodMultiList.length, selectGood);
+        this.$emit('changeView', {view: 'list'});
       }
     }
   };
 </script>
+
 <style rel="stylesheet/scss" lang="scss" scoped>
   @import "../../assets/css/mixin.scss";
   
@@ -214,6 +166,13 @@
     position: relative;
     .createPost-main-container {
       margin: 20px;
+      h3 {
+        color: #03b8cc;
+        font-size: inherit;
+        font-weight: 400;
+        margin-bottom: 10px;
+        margin-top: 30px;
+      }
       .postInfo-container {
         position: relative;
         @include clearfix;
