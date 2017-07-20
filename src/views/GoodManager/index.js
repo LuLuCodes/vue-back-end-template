@@ -1,2 +1,2 @@
-export { default as AddSwiper } from './add.vue';
-export { default as SwiperList } from './list.vue';
+export { default as AddGood } from './add.vue';
+export { default as GoodList } from './list.vue';

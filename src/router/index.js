@@ -18,7 +18,7 @@ import { AddSwiper, SwiperList } from '../views/SwiperManager/';
 import ClientManager from '../views/ClientManager/index.vue';
 
 /* good manager */
-import GoodManager from '../views/GoodManager/index.vue';
+import { AddGood, GoodList } from '../views/GoodManager/index';
 
 /* category manager */
 import CategoryManager from '../views/CategoryManager/index.vue';
@@ -88,7 +88,8 @@ export const asyncRouterMap = [
     name: '商品管理',
     icon: 'fa-gift',
     children: [
-      {path: 'good-manager', component: GoodManager, name: '商品列表', meta: {keepAlive: true}},
+      {path: 'good-manager', component: GoodList, name: '商品列表', meta: {keepAlive: true}},
+      {path: 'add-good', component: AddGood, hidden: true, meta: {keepAlive: true}},
       {path: 'category-manager', component: CategoryManager, name: '商品分类设置', meta: {keepAlive: true}}
     ]
   },

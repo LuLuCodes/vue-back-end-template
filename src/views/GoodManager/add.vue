@@ -217,10 +217,10 @@
     filters: {},
     methods: {
       submitForm() {
-        this.$emit('changeView', {view: 'list'});
+        this.$router.go(-1);
       },
       cancel() {
-        this.$emit('changeView', {view: 'list'});
+        this.$router.go(-1);
       },
       handleCheckAllTagChange(event) {
         let tags = [];

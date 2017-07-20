@@ -576,7 +576,7 @@
         this.isIndeterminateStatus = checkedCount > 0 && checkedCount < this.goodStatus.length;
       },
       handleCreate() {
-        this.$emit('changeView', {view: 'add'});
+        this.jump({path: '/good/add-good'});
       }
     }
   };
