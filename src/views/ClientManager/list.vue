@@ -62,7 +62,7 @@
         this.disableClientCount = val;
       },
       goToDetial(id) {
-        this.$emit('changeView', {view: 'edit', param: {id}});
+        this.jump({path: '/client/edit-client', query: { id }});
       }
     }
   };

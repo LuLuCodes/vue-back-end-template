@@ -12,13 +12,13 @@ import Login from '../views/Login/index.vue';
 import Bashboard from '../views/Bashboard/index.vue';
 
 /* swiper manager */
-import { AddSwiper, SwiperList } from '../views/SwiperManager/';
+import {AddSwiper, SwiperList} from '../views/SwiperManager';
 
 /* client manager */
-import ClientManager from '../views/ClientManager/index.vue';
+import {EditClient, ClientList} from '../views/ClientManager';
 
 /* good manager */
-import { AddGood, GoodList } from '../views/GoodManager/index';
+import {AddGood, GoodList} from '../views/GoodManager';
 
 /* category manager */
 import CategoryManager from '../views/CategoryManager/index.vue';
@@ -73,13 +73,16 @@ export const asyncRouterMap = [
     ]
   },
   {
-    path: '/client-manager',
+    path: '/client',
     component: Layout,
-    redirect: '/client-manager/index',
+    redirect: '/client-manager',
     name: '客户管理',
     icon: 'fa-users',
     noDropdown: true,
-    children: [{path: 'index', component: ClientManager, name: '客户管理', meta: {keepAlive: true}}]
+    children: [
+      {path: 'client-manager', component: ClientList, name: '客户管理', meta: {keepAlive: true}},
+      {path: 'edit-client', component: EditClient, hidden: true, meta: {keepAlive: true}}
+    ]
   },
   {
     path: '/good',
