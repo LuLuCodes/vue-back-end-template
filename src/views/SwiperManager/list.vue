@@ -206,6 +206,14 @@
       handleCreate() {
         this.jump({path: '/web/add-swiper'});
       }
+    },
+    beforeRouteEnter (to, from, next) {
+      if (from.path.indexOf('manager') !== -1) {
+        to.meta.keepAlive = false;
+      } else {
+        to.meta.keepAlive = true;
+      }
+      next();
     }
   };
 </script>

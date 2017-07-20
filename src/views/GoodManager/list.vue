@@ -451,7 +451,7 @@
   ];
 
   const tags = [{id: 1, name: '新品上架'}, {id: 2, name: '热卖促销'}, {id: 3, name: '新客优惠'}];
-
+  
   export default {
     components: {},
     name: 'GoodList',
@@ -578,6 +578,14 @@
       handleCreate() {
         this.jump({path: '/good/add-good'});
       }
+    },
+    beforeRouteEnter (to, from, next) {
+      if (from.path.indexOf('manager') !== -1) {
+        to.meta.keepAlive = false;
+      } else {
+        to.meta.keepAlive = true;
+      }
+      next();
     }
   };
 </script>

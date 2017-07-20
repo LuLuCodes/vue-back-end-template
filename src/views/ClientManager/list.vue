@@ -65,9 +65,12 @@
         this.jump({path: '/client/edit-client', query: { id }});
       }
     },
-    beforeRouteLeave(to, from, next) {
-      // 设置下一个路由的 meta
-      to.meta.keepAlive = false;  // 让 A 缓存，即不刷新
+    beforeRouteEnter (to, from, next) {
+      if (from.path.indexOf('manager') !== -1) {
+        to.meta.keepAlive = false;
+      } else {
+        to.meta.keepAlive = true;
+      }
       next();
     }
   };
