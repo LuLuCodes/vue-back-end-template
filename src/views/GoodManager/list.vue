@@ -580,11 +580,17 @@
         this.jump({path: '/good/add-good'});
       }
     },
-    beforeRouteLeave (to, from, next) {
-      if (keepAliveList.indexOf(to.path) !== -1) {
-        this.$destroy();
-      }
-      next();
+    beforeRouteEnter (to, from, next) {
+      next(vm => {
+        // 通过 `vm` 访问组件实例
+        if (keepAliveList.indexOf(from.path) !== -1) {
+          vm.listQuery.page = 1;
+          vm.listQuery.limit = 20;
+          vm.listQuery.title = undefined;
+          vm.listQuery.status = undefined;
+          vm.getList();
+        }
+      });
     }
   };
 </script>
