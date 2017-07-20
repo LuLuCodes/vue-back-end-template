@@ -185,10 +185,10 @@
     },
     methods: {
       submitForm() {
-        this.$emit('changeView', 'list');
+        this.$router.go(-1);
       },
       cancel() {
-        this.$emit('changeView', 'list');
+        this.$router.go(-1);
       },
       submitMutliSelectGood(selectGoodList) {
         this.goodMultiList.splice(0, this.goodMultiList.length, ...selectGoodList);

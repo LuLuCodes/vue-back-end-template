@@ -204,7 +204,7 @@
         this.list.splice(index, 1);
       },
       handleCreate() {
-        this.jump({path: '/web/add-manager'});
+        this.jump({path: '/web/add-swiper'});
       }
     }
   };

@@ -42,8 +42,7 @@ export const constantRouterMap = [
   // {path: '/authredirect', component: authRedirect, hidden: true},
   {path: '/404', component: Err404, hidden: true, meta: {keepAlive: true}},
   {path: '/401', component: Err401, hidden: true, meta: {keepAlive: true}},
-  {path: '/', redirect: '/dashboard', hidden: true, meta: {keepAlive: true}},
-  {path: '/web/add-manager', component: AddSwiper, hidden: true, meta: {keepAlive: true}}
+  {path: '/', redirect: '/dashboard', hidden: true, meta: {keepAlive: true}}
 ];
 
 export default new Router({
@@ -69,7 +68,8 @@ export const asyncRouterMap = [
     name: '官网设置',
     icon: 'fa-cogs',
     children: [
-      {path: 'swiper-manager', component: SwiperList, name: '轮播图设置', meta: {keepAlive: true}}
+      {path: 'swiper-manager', component: SwiperList, name: '轮播图设置', meta: {keepAlive: true}},
+      {path: 'add-swiper', component: AddSwiper, hidden: true, meta: {keepAlive: true}}
     ]
   },
   {
