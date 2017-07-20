@@ -45,10 +45,13 @@
     computed: {},
     created() {
     },
+    mounted() {
+      console.log(123123);
+      this.clientId = parseInt(this.$route.query.id);
+    },
     activated() {
       // 当组件在 <keep-alive> 内被切换，它的 activated 和 deactivated 这两个生命周期钩子函数将会被对应执行
       // 数据加载应该放在此处
-      this.clientId = this.$route.query.id;
     },
     deactivated() {
       // 当组件在 <keep-alive> 内被切换，它的 activated 和 deactivated 这两个生命周期钩子函数将会被对应执行
