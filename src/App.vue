@@ -2,14 +2,11 @@
   <div id="app">
     <transition name="router-fade" mode="out-in">
       <keep-alive>
-        <router-view v-if="$route.meta.keepAlive">
-          <!-- 这里是会被缓存的视图组件！ -->
-        </router-view>
+        <router-view v-if="$route.meta.keepAlive"></router-view>
       </keep-alive>
-  
-      <router-view v-if="!$route.meta.keepAlive">
-        <!-- 这里是不被缓存的视图组件！ -->
-      </router-view>
+    </transition>
+    <transition name="router-fade" mode="out-in">
+      <router-view v-if="!$route.meta.keepAlive"></router-view>
     </transition>
   </div>
 </template>

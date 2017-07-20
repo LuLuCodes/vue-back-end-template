@@ -12,7 +12,7 @@ import Login from '../views/Login/index.vue';
 import Bashboard from '../views/Bashboard/index.vue';
 
 /* swiper manager */
-import SwiperManager from '../views/SwiperManager/index.vue';
+import { AddSwiper, SwiperList } from '../views/SwiperManager/';
 
 /* client manager */
 import ClientManager from '../views/ClientManager/index.vue';
@@ -38,11 +38,12 @@ Vue.use(Router);
  **/
 
 export const constantRouterMap = [
-  {path: '/login', component: Login, hidden: true},
+  {path: '/login', component: Login, hidden: true, meta: {keepAlive: true}},
   // {path: '/authredirect', component: authRedirect, hidden: true},
-  {path: '/404', component: Err404, hidden: true},
-  {path: '/401', component: Err401, hidden: true},
-  {path: '/', redirect: '/dashboard', hidden: true}
+  {path: '/404', component: Err404, hidden: true, meta: {keepAlive: true}},
+  {path: '/401', component: Err401, hidden: true, meta: {keepAlive: true}},
+  {path: '/', redirect: '/dashboard', hidden: true, meta: {keepAlive: true}},
+  {path: '/web/add-manager', component: AddSwiper, hidden: true, meta: {keepAlive: true}}
 ];
 
 export default new Router({
@@ -59,7 +60,7 @@ export const asyncRouterMap = [
     name: '首页',
     icon: 'fa-home',
     noDropdown: true,
-    children: [{path: 'index', component: Bashboard, name: '首页'}]
+    children: [{path: 'index', component: Bashboard, name: '首页', meta: {keepAlive: true}}]
   },
   {
     path: '/web',
@@ -68,7 +69,7 @@ export const asyncRouterMap = [
     name: '官网设置',
     icon: 'fa-cogs',
     children: [
-      {path: 'swiper-manager', component: SwiperManager, name: '轮播图设置'}
+      {path: 'swiper-manager', component: SwiperList, name: '轮播图设置', meta: {keepAlive: true}}
     ]
   },
   {
@@ -78,7 +79,7 @@ export const asyncRouterMap = [
     name: '客户管理',
     icon: 'fa-users',
     noDropdown: true,
-    children: [{path: 'index', component: ClientManager, name: '客户管理'}]
+    children: [{path: 'index', component: ClientManager, name: '客户管理', meta: {keepAlive: true}}]
   },
   {
     path: '/good',
@@ -87,9 +88,9 @@ export const asyncRouterMap = [
     name: '商品管理',
     icon: 'fa-gift',
     children: [
-      {path: 'good-manager', component: GoodManager, name: '商品列表'},
-      {path: 'category-manager', component: CategoryManager, name: '商品分类设置'}
+      {path: 'good-manager', component: GoodManager, name: '商品列表', meta: {keepAlive: true}},
+      {path: 'category-manager', component: CategoryManager, name: '商品分类设置', meta: {keepAlive: true}}
     ]
   },
-  {path: '*', redirect: '/404', hidden: true}
+  {path: '*', redirect: '/404', hidden: true, meta: {keepAlive: true}}
 ];

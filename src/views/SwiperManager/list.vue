@@ -204,7 +204,7 @@
         this.list.splice(index, 1);
       },
       handleCreate() {
-        this.$emit('changeView', 'add');
+        this.jump({path: '/web/add-manager'});
       }
     }
   };
