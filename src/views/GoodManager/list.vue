@@ -206,7 +206,8 @@
 
 <script>
   import {parseTime} from '../../assets/js/tool';
-
+  import keepAliveList from '../keepAliveList';
+  
   const testData = [
     {
       id: 100001,
@@ -579,11 +580,9 @@
         this.jump({path: '/good/add-good'});
       }
     },
-    beforeRouteEnter (to, from, next) {
-      if (from.path.indexOf('manager') !== -1) {
-        to.meta.keepAlive = false;
-      } else {
-        to.meta.keepAlive = true;
+    beforeRouteLeave (to, from, next) {
+      if (keepAliveList.indexOf(to.path) !== -1) {
+        this.$destroy();
       }
       next();
     }

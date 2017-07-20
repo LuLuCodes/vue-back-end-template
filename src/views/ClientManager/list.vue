@@ -33,6 +33,7 @@
   import AllClientPane from './allClientPane.vue';
   import EnableClientPane from './enableClientPane.vue';
   import DisableClientPane from './disableClientPane.vue';
+  import keepAliveList from '../keepAliveList';
 
   export default {
     name: 'ClientList',
@@ -65,11 +66,9 @@
         this.jump({path: '/client/edit-client', query: { id }});
       }
     },
-    beforeRouteEnter (to, from, next) {
-      if (from.path.indexOf('manager') !== -1) {
-        to.meta.keepAlive = false;
-      } else {
-        to.meta.keepAlive = true;
+    beforeRouteLeave (to, from, next) {
+      if (keepAliveList.indexOf(to.path) !== -1) {
+        this.$destroy();
       }
       next();
     }

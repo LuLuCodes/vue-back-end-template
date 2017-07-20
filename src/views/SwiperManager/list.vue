@@ -94,7 +94,8 @@
 
 <script>
   import { parseTime } from '../../assets/js/tool';
-
+  import keepAliveList from '../keepAliveList';
+  
   const testData = [
     {id: 100001, title: '轮播图1', auditor: 'leyi', timestamp: '2017-07-17 12:12:12', url: 'http://img1.imgtn.bdimg.com/it/u=4024981923,3433833314&fm=26&gp=0.jpg', status: 1},
     {id: 100002, title: '轮播图2', auditor: 'leyi', timestamp: '2017-07-17 12:12:12', url: 'http://img1.imgtn.bdimg.com/it/u=4024981923,3433833314&fm=26&gp=0.jpg', status: 1},
@@ -207,11 +208,10 @@
         this.jump({path: '/web/add-swiper'});
       }
     },
-    beforeRouteEnter (to, from, next) {
-      if (from.path.indexOf('manager') !== -1) {
-        to.meta.keepAlive = false;
-      } else {
-        to.meta.keepAlive = true;
+    beforeRouteLeave (to, from, next) {
+      if (keepAliveList.indexOf(to.path) !== -1) {
+        console.log(12312312313);
+        this.$destroy();
       }
       next();
     }
