@@ -1,7 +1,9 @@
 <template>
   <section class="app-main" style="min-height: 100%">
     <transition name="fade" mode="out-in">
-      <router-view :key="key"></router-view>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     </transition>
   </section>
 </template>
