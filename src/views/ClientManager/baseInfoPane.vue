@@ -1,21 +1,22 @@
 <template>
   <div class="createPost-container">
-    <el-form v-loading="infoLoading" element-loading-text="拼命加载中" class="form-container" :model="baseInfo" ref="baseInfo">
+    <el-form v-loading="infoLoading" element-loading-text="拼命加载中" class="form-container"
+             :model="baseInfo" ref="baseInfo" label-position="right" label-width="110px">
       <div class="createPost-main-container">
         <el-row>
-          <el-col :span="5">
+          <el-col :span="8">
             <el-form-item label="客户编码：" prop="id">
-              <el-input v-model="baseInfo.id" style="width: 150px;" size="small" :disabled="true"></el-input>
-            </el-form-item>
-          </el-col>
-          
-          <el-col :span="6">
-            <el-form-item label="昵称/姓名：" prop="name">
-              <el-input v-model="baseInfo.name" style="width: 190px;" size="small" :disabled="true"></el-input>
+              <el-input v-model="baseInfo.id" style="width: 300px;" size="small" :disabled="true"></el-input>
             </el-form-item>
           </el-col>
           
           <el-col :span="8">
+            <el-form-item label="昵称/姓名：" prop="name">
+              <el-input v-model="baseInfo.name" style="width: 300px;" size="small" :disabled="true"></el-input>
+            </el-form-item>
+          </el-col>
+          
+          <el-col :span="6">
             <el-form-item label="状态：" prop="status">
               <el-tag :type="baseInfo.status | statusFilter">{{baseInfo.status ? '启用' : '禁用'}}</el-tag>
             </el-form-item>
@@ -23,40 +24,41 @@
         </el-row>
         
         <el-row>
-          <el-col :span="6">
+          <el-col :span="8">
             <el-form-item label="注册时间：" prop="timestamp">
               <el-date-picker
                 v-model="baseInfo.timestamp"
                 type="datetime"
-                placeholder="选择日期时间" size="small" :disabled="true">
+                placeholder="选择日期时间" size="small" :disabled="true" style="width: 300px;">
               </el-date-picker>
             </el-form-item>
           </el-col>
           
-          <el-col :span="7">
-            <el-form-item label="最后下单时间：" prop="ordertime">
+          <el-col :span="8">
+            <el-form-item label="下单时间：" prop="ordertime">
               <el-date-picker
                 v-model="baseInfo.ordertime"
                 type="datetime"
-                placeholder="选择日期时间" size="small" :disabled="true">
+                placeholder="选择日期时间" size="small" :disabled="true" style="width: 300px;">
               </el-date-picker>
             </el-form-item>
           </el-col>
         </el-row>
         
         <el-row>
-          <el-col :span="5">
+          <el-col :span="8">
             <el-form-item label="手机号码：" prop="phone">
-              <el-input v-model="baseInfo.phone" style="width: 150px;" size="small" :disabled="true"></el-input>
+              <el-input v-model="baseInfo.phone" style="width: 300px;" size="small" :disabled="true"></el-input>
             </el-form-item>
           </el-col>
           
-          <el-col :span="6">
-            <el-form-item label="客户地址：" prop="pcdCodes">
+          <el-col :span="8">
+            <el-form-item label="省市区：" prop="pcdCodes">
               <el-cascader
                 :options="pcdList"
                 v-model="baseInfo.pcdCodes"
-                :disabled="true">
+                :disabled="true"
+                style="width: 300px;">
               </el-cascader>
             </el-form-item>
           </el-col>
@@ -67,9 +69,10 @@
             <el-form-item label="详细地址：" prop="address">
               <el-input
                 type="textarea"
-                :rows="2"
+                :rows="3"
                 placeholder="请输入内容"
-                v-model="baseInfo.address" :disabled="true">
+                v-model="baseInfo.address" :disabled="true"
+                style="width: 600px;">
               </el-input>
             </el-form-item>
           </el-col>

@@ -2,7 +2,7 @@
   <div class="createPost-container">
     <el-form class="form-container" :model="postForm" :rules="rules" ref="postForm" label-width="80px"
              label-position="right">
-      <sticky :className="'sub-navbar published'">
+      <sticky :className="'sub-navbar published'" :zIndex="2">
         <el-button v-loading="loading" style="margin-left: 10px;" type="success" @click="submitForm()">保存
         </el-button>
         <el-button type="warning" @click="cancel()">取消</el-button>
