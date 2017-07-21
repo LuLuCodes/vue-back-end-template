@@ -7,7 +7,7 @@
             <span style="font-size: 25px;color: #f96b6b;">待付款</span>
           </el-col>
           <el-col :span="8">
-            <span style="font-size: 14px;color: #97a8be;">订单号：{{orderId}} &nbsp;&nbsp;&nbsp;&nbsp; 订单编码：DH-O-20170721-095606</span>
+            <span style="font-size: 14px;color: #98a8b8;">订单号：{{orderId}} &nbsp;&nbsp;&nbsp;&nbsp; 订单编码：DH-O-20170721-095606</span>
           </el-col>
           <el-col :span="5" :push="8">
             <el-button class="filter-item" type="info" v-waves>发货
@@ -48,6 +48,38 @@
         <el-table-column align="center" width="100px" prop="total" label="金额小计">
         </el-table-column>
       </el-table>
+      <div class="receive-container">
+        <el-row class="receive-container-item">
+          <el-col>
+            <span style="color: #98a8b8;">收货信息&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span>收货人: 乐毅&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span>联系方式: 13758087094&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span>收货地址: 嘉兴市南湖区富路润300号嘉兴电子商务产业园3号园嘉兴麦云科技&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          </el-col>
+        </el-row>
+        <el-row class="receive-container-item">
+          <el-col>
+            <span style="color: #98a8b8;">发货时间&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <el-date-picker
+              type="datetime"
+              placeholder="选择日期时间"
+              disabled
+              size="small">
+            </el-date-picker>
+          </el-col>
+        </el-row>
+        <el-row class="receive-container-item">
+          <el-col>
+            <span style="color: #98a8b8;">备注说明&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <el-date-picker
+              type="datetime"
+              placeholder="选择日期时间"
+              disabled
+              size="small">
+            </el-date-picker>
+          </el-col>
+        </el-row>
+      </div>
     </div>
   </div>
 </template>
@@ -196,6 +228,14 @@
     position: relative;
     .createPost-main-container {
       margin: 0 20px;
+      .receive-container {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #415161;
+        .receive-container-item {
+          margin: 12px 0;
+        }
+      }
       .postInfo-container {
         position: relative;
         @include clearfix;
