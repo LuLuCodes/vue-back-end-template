@@ -15,6 +15,7 @@
             placeholder="选择日期时间"
             align="right"
             :picker-options="datePickerOptions"
+            clearable
             size="small">
           </el-date-picker>
           

@@ -38,6 +38,7 @@
                         type="datetimerange"
                         :picker-options="dateTimePickerOptions"
                         placeholder="选择时间范围"
+                        clearable
                         align="right">
                       </el-date-picker>
                     </el-form-item>

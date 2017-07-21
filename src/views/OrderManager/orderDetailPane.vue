@@ -10,10 +10,65 @@
             <span style="font-size: 14px;color: #98a8b8;">订单号：{{orderId}} &nbsp;&nbsp;&nbsp;&nbsp; 订单编码：DH-O-20170721-095606</span>
           </el-col>
           <el-col :span="5" :push="8">
-            <el-button class="filter-item" type="info" v-waves>发货
+            <!--发货popover-->
+            <el-popover
+              ref="sendGoodsPopover"
+              placement="top-start"
+              width="1000"
+              trigger="click"
+              v-model="showSendGoodsPopover">
+              <el-form label-width="80px" label-position="right">
+                <el-row>
+                  <el-col :span="12">
+                    <el-row>
+                      <el-col>
+                        <el-form-item label="发货日期">
+                          <el-date-picker
+                            type="datetime"
+                            placeholder="选择日期时间"
+                            clearable
+                            size="small">
+                          </el-date-picker>
+                        </el-form-item>
+                      </el-col>
+                      <el-col>
+                        <el-form-item label="物流公司">
+                          <el-select clearable placeholder="请选择" size="small">
+                            <el-option
+                              v-for="item in logisticsCompany"
+                              :key="item.value"
+                              :label="item.label"
+                              :value="item.value">
+                            </el-option>
+                          </el-select>
+                        </el-form-item>
+                      </el-col>
+                    </el-row>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-form-item label="物流备注">
+                      <el-input
+                        type="textarea"
+                        :rows="5"
+                        placeholder="请输入内容"
+                        size="small">
+                      </el-input>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
+      
+                <el-form-item>
+                  <el-button type="primary" size="small">确定</el-button>
+                  <el-button size="small" @click="showSendGoodsPopover = false">取消</el-button>
+                </el-form-item>
+              </el-form>
+            </el-popover>
+            <el-button class="filter-item" type="info" v-waves v-popover:sendGoodsPopover>发货
             </el-button>
+            
             <el-button class="filter-item" type="danger" v-waves>取消
             </el-button>
+            
             <el-button class="filter-item" type="success" v-waves>审核
             </el-button>
           </el-col>
@@ -106,6 +161,8 @@
       return {
         infoLoading: false,
         showRemarkDialog: false,
+        showSendGoodsPopover: false,
+        logisticsCompany: [{label: '顺丰快递', value: 0}, {label: '圆通快递', value: 1}],
         pcdList: [
           {
             value: 100001,

@@ -29,7 +29,7 @@
               <el-date-picker
                 v-model="baseInfo.timestamp"
                 type="datetime"
-                placeholder="选择日期时间" size="small" :disabled="true" style="width: 300px;">
+                placeholder="选择日期时间" size="small" disabled style="width: 300px;">
               </el-date-picker>
             </el-form-item>
           </el-col>
@@ -39,7 +39,7 @@
               <el-date-picker
                 v-model="baseInfo.ordertime"
                 type="datetime"
-                placeholder="选择日期时间" size="small" :disabled="true" style="width: 300px;">
+                placeholder="选择日期时间" size="small" disabled style="width: 300px;">
               </el-date-picker>
             </el-form-item>
           </el-col>
