@@ -290,8 +290,8 @@
         this.checkAllStatus = checkedCount === this.orderStatus.length;
         this.isIndeterminateStatus = checkedCount > 0 && checkedCount < this.orderStatus.length;
       },
-      handleCreate() {
-        this.jump({path: '/good/add-good'});
+      handleDetail() {
+        this.jump({path: '/order/edit-order'});
       },
       handleSelection(selection, row) {
         this.selectOrders = selection;

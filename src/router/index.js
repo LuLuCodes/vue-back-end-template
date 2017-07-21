@@ -24,7 +24,7 @@ import {AddGood, GoodList} from '../views/GoodManager';
 import CategoryManager from '../views/CategoryManager/index.vue';
 
 /* order manager */
-import {OrderList} from '../views/OrderManager';
+import {OrderList, EditOrder} from '../views/OrderManager';
 
 /* error page */
 import Err404 from '../views/Error/404.vue';
@@ -106,7 +106,8 @@ export const asyncRouterMap = [
     name: '订单管理',
     icon: 'fa-file-text',
     children: [
-      {path: 'order-manager', component: OrderList, name: '订单列表', meta: {keepAlive: true}}
+      {path: 'order-manager', component: OrderList, name: '订单列表', meta: {keepAlive: true}},
+      {path: 'edit-order', component: EditOrder, name: '订单详情', hidden: true, meta: {keepAlive: false}}
     ]
   },
   {path: '*', redirect: '/404', hidden: true}
