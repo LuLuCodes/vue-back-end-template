@@ -69,14 +69,23 @@
           </el-col>
         </el-row>
         <el-row class="receive-container-item">
-          <el-col>
+          <el-col :span="2">
             <span style="color: #98a8b8;">备注说明&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <el-date-picker
-              type="datetime"
-              placeholder="选择日期时间"
-              disabled
-              size="small">
-            </el-date-picker>
+            <i class="el-icon-plus"></i>
+          </el-col>
+          <el-col :span="22">
+            <el-row>
+              备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明
+            </el-row>
+            <el-row>
+              备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明
+            </el-row>
+            <el-row>
+              备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明
+            </el-row>
+            <el-row>
+              备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明
+            </el-row>
           </el-col>
         </el-row>
       </div>
