@@ -31,7 +31,7 @@
     },
     data() {
       return {
-        clientId: undefined
+        orderId: undefined
       };
     },
     props: {

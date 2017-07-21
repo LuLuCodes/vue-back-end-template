@@ -1,10 +1,10 @@
 <template>
   <div class="createPost-container">
-    <div class="createPost-main-container">
+    <div class="createPost-main-container" v-loading="infoLoading">
       <div class="filter-container">
         <el-row>
           <el-col :span="3">
-            <span style="color: #f96b6b;">待付款</span>
+            <span style="font-size: 25px;color: #f96b6b;">待付款</span>
           </el-col>
           <el-col :span="8">
             <span style="font-size: 14px;color: #97a8be;">订单号：{{orderId}} &nbsp;&nbsp;&nbsp;&nbsp; 订单编码：DH-O-20170721-095606</span>
@@ -19,7 +19,35 @@
           </el-col>
         </el-row>
       </div>
+      <el-table ref="goodTable" :data="goodList" element-loading-text="拼命加载中" fit highlight-current-row style="width: 100%;"
+                show-summary :summary-method="getSummaries">
+        <el-table-column align="center" width="100px" label="商品主图">
+          <template scope="scope">
+            <img :src="scope.row.url" style="width: 60px;height: 60px;padding-top: 5px;"/>
+          </template>
+        </el-table-column>
+    
+        <el-table-column align="center" prop="title" min-width="200px" label="商品名称" show-overflow-tooltip>
+        </el-table-column>
+    
+        <el-table-column align="center" min-width="150px" prop="id" label="商品编码">
+        </el-table-column>
+    
+        <el-table-column align="center" width="150px" prop="sku" label="规格">
+        </el-table-column>
   
+        <el-table-column align="center" width="100px" prop="quantity" label="数量">
+        </el-table-column>
+  
+        <el-table-column align="center" width="100px" prop="unit" label="单位">
+        </el-table-column>
+        
+        <el-table-column align="center" width="100px" prop="unitPrice" label="单价">
+        </el-table-column>
+  
+        <el-table-column align="center" width="100px" prop="total" label="金额小计">
+        </el-table-column>
+      </el-table>
     </div>
   </div>
 </template>
@@ -67,6 +95,29 @@
               }
             ]
           }
+        ],
+        goodList: [
+          {
+            id: 100001,
+            title: '商品1',
+            url: 'http://img1.imgtn.bdimg.com/it/u=4024981923,3433833314&fm=26&gp=0.jpg',
+            sku: '100kg',
+            unit: '袋',
+            unitPrice: 10.00,
+            quantity: 10,
+            total: 100
+          },
+          {
+            id: 100002,
+            title: '商品2',
+            url: 'http://img1.imgtn.bdimg.com/it/u=4024981923,3433833314&fm=26&gp=0.jpg',
+            status: 1,
+            sku: '一箱',
+            unit: '箱',
+            unitPrice: 100.00,
+            quantity: 20,
+            total: 2000
+          }
         ]
       };
     },
@@ -98,22 +149,34 @@
       getBaseInfo() {
         this.infoLoading = true;
         setTimeout(() => {
-          this.baseInfo = {
-            id: this.clientId,
-            name: 'leyi',
-            head: 'http://img4.imgtn.bdimg.com/it/u=157241173,3207275343&fm=26&gp=0.jpg',
-            phone: '13758087094',
-            pcdDes: ['浙江省', '嘉兴市', '南湖区'],
-            pcdCodes: [100001, 120001, 121001],
-            address: '富润路300号嘉兴麦云科技',
-            timestamp: '2017-07-17 12:12:12',
-            ordertime: '2017-07-17 12:12:12',
-            status: 1
-          };
           this.infoLoading = false;
         }, 2000);
       },
-      goBack() {
+      getSummaries(param) {
+        let { columns, data } = param;
+        let sums = [];
+        let excludeCol = [0, 1, 2, 3, 5];
+        columns.forEach((column, index) => {
+          if (index === 0) {
+            sums[index] = '应付金额';
+            return;
+          }
+          if (excludeCol.indexOf(index) !== -1) {
+            sums[index] = '';
+            return;
+          }
+          const values = data.map(item => Number(item[column.property]));
+          sums[index] = values.reduce((prev, curr) => {
+            const value = Number(curr);
+            if (!isNaN(value)) {
+              return prev + curr;
+            } else {
+              return prev;
+            }
+          }, 0);
+        });
+
+        return sums;
       }
     }
   };
