@@ -117,6 +117,12 @@
           <span class="link-type" @click="handleDetail(scope.row)">{{scope.row.orderId}}</span>
         </template>
       </el-table-column>
+  
+      <el-table-column align="center" min-width="150px" label="订单编码" show-overflow-tooltip>
+        <template scope="scope">
+          <span class="link-type" @click="handleDetail(scope.row)">{{scope.row.orderCode}}</span>
+        </template>
+      </el-table-column>
     
       <el-table-column align="center" width="180px" label="下单时间" prop="timestamp" sortable>
       </el-table-column>
@@ -149,41 +155,41 @@
   import keepAliveList from '../keepAliveList';
 
   const testData = [
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
-    {orderId: 'DH-O-20170721-095601', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
-    {orderId: 'DH-O-20170721-095602', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 3},
-    {orderId: 'DH-O-20170721-095603', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 4},
-    {orderId: 'DH-O-20170721-095604', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 5},
-    {orderId: 'DH-O-20170721-095605', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
-    {orderId: 'DH-O-20170721-095607', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
-    {orderId: 'DH-O-20170721-095608', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
-    {orderId: 'DH-O-20170721-095601', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 3},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 4},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 5},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 5},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 4},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 3},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 3},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 4},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 5},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 5},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
-    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1}
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095601', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095602', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 3},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095603', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 4},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095604', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 5},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095605', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095607', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095608', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095601', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 3},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 4},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 5},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 5},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 4},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 3},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 3},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 4},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 5},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 5},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 95601, orderCode: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1}
   ];
 
 
@@ -291,7 +297,7 @@
         this.isIndeterminateStatus = checkedCount > 0 && checkedCount < this.orderStatus.length;
       },
       handleDetail() {
-        this.jump({path: '/order/edit-order'});
+        this.jump({path: '/order/edit-order?id=95606'});
       },
       handleSelection(selection, row) {
         this.selectOrders = selection;
