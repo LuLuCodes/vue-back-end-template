@@ -180,18 +180,6 @@
           <span v-popover:optionMenu>...</span>
         </template>
       </el-table-column>
-      
-      <!--<el-table-column align="center" label="操作" width="150">-->
-      <!--<template scope="scope">-->
-      <!--<el-button v-if="scope.row.status === 0" size="small" type="info" @click="handleModifyStatus(scope.row, 1)">发布-->
-      <!--</el-button>-->
-      <!--<el-button v-if="scope.row.status === 1" size="small" type="warning" @click="handleModifyStatus(scope.row, 0)">撤下-->
-      <!--</el-button>-->
-      <!--<el-button size="small" type="danger" @click="handleDelete(scope.row )">删除-->
-      <!--</el-button>-->
-      <!--</template>-->
-      <!--</el-table-column>-->
-    
     </el-table>
     
     <div v-show="!listLoading" class="pagination-container">
