@@ -85,6 +85,43 @@
         </el-col>
       </el-row>
     </div>
+  
+    <el-table :data="list" v-loading="listLoading" element-loading-text="拼命加载中" :height="tableHeight" border stripe fit
+              highlight-current-row style="width: 100%">
+      <el-table-column align="center"
+                       type="selection"
+                       width="55">
+      </el-table-column>
+    
+      <el-table-column align="center" min-width="100px" label="订单号" show-overflow-tooltip>
+        <template scope="scope">
+          <span class="link-type" @click="handleDetail(scope.row)">{{scope.row.orderId}}</span>
+        </template>
+      </el-table-column>
+    
+      <el-table-column align="center" width="180px" label="下单时间" prop="timestamp" sortable>
+      </el-table-column>
+  
+      <el-table-column align="center" min-width="200px" label="收货人" prop="receiver" sortable show-overflow-tooltip>
+      </el-table-column>
+    
+      <el-table-column align="center" width="200px" label="金额" prop="money">
+      </el-table-column>
+    
+      <el-table-column align="center" label="状态" width="100">
+        <template scope="scope">
+          <el-tag :type="scope.row.status | statusFilter">{{scope.row.status | statusFilterTip}}</el-tag>
+        </template>
+      </el-table-column>
+    </el-table>
+  
+    <div v-show="!listLoading" class="pagination-container">
+      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                     :current-page.sync="listQuery.page"
+                     :page-sizes="[10,20,30, 50]" :page-size="listQuery.limit"
+                     layout="total, sizes, prev, pager, next, jumper" :total="total">
+      </el-pagination>
+    </div>
   </div>
 </template>
 
@@ -92,7 +129,43 @@
   import {parseTime} from '../../assets/js/tool';
   import keepAliveList from '../keepAliveList';
 
-  const testData = [];
+  const testData = [
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 'DH-O-20170721-095601', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
+    {orderId: 'DH-O-20170721-095602', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 3},
+    {orderId: 'DH-O-20170721-095603', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 4},
+    {orderId: 'DH-O-20170721-095604', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 5},
+    {orderId: 'DH-O-20170721-095605', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 'DH-O-20170721-095607', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 'DH-O-20170721-095608', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
+    {orderId: 'DH-O-20170721-095601', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 3},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 4},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 5},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 5},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 4},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 3},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 3},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 4},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 5},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 2},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 5},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1},
+    {orderId: 'DH-O-20170721-095606', timestamp: '2017-07-21 12:45:32', receiver: 'leyi', money: '45.34', status: 1}
+  ];
 
 
   export default {
@@ -110,7 +183,7 @@
           orderId: undefined,
           status: undefined
         },
-        orderStatus: [{label: '待付款', value: 1}, {label: '待发货', value: 2}, {label: '已发货', value: 3}, {label: '已完成', value: 4}, {label: '已取消', value: 5}],
+        orderStatus: [{label: '待付款', value: 1}, {label: '待发货', value: 2}, {label: '已发货', value: 3}, {label: '已取消', value: 4}, {label: '已完成', value: 5}],
         checkAllStatus: true,
         checkedStatuss: [0, 1],
         isIndeterminateStatus: false,
@@ -156,8 +229,12 @@
         return parseTime(time);
       },
       statusFilter(status) {
-        const statusMap = ['danger', 'success'];
-        return statusMap[status];
+        const statusMap = ['primary', 'success', 'warning', 'danger', 'gray'];
+        return statusMap[status - 1];
+      },
+      statusFilterTip(status) {
+        const statusMap = ['待付款', '待发货', '已发货', '已取消', '已完成'];
+        return statusMap[status - 1];
       }
     },
     methods: {

@@ -9,9 +9,9 @@
           
           <el-date-picker
             class="filter-item"
+            type="datetimerange"
             @keyup.enter.native="handleFilter"
             v-model="listQuery.timestamp"
-            type="datetime"
             placeholder="选择日期时间"
             align="right"
             :picker-options="datePickerOptions"
@@ -134,23 +134,28 @@
         ],
         datePickerOptions: {
           shortcuts: [{
-            text: '今天',
+            text: '最近一周',
             onClick(picker) {
-              picker.$emit('pick', new Date());
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit('pick', [start, end]);
             }
           }, {
-            text: '昨天',
+            text: '最近一个月',
             onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24);
-              picker.$emit('pick', date);
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+              picker.$emit('pick', [start, end]);
             }
           }, {
-            text: '一周前',
+            text: '最近三个月',
             onClick(picker) {
-              const date = new Date();
-              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', date);
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
+              picker.$emit('pick', [start, end]);
             }
           }]
         }
