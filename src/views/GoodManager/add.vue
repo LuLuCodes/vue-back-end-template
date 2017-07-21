@@ -270,7 +270,7 @@
   };
 </script>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
+<style rel="stylesheet/scss" lang="scss">
   @import "../../assets/css/mixin.scss";
   .title-prompt {
     position: absolute;
@@ -285,12 +285,12 @@
     .createPost-main-container {
       margin: 20px;
       .my-sortable-placeholder{
-        width: 120px;
-        height: 120px;
-        border-radius: 0;
-        margin:0 8px 8px 0;
-        border:1px dashed #e1e1e1;
-        display:inline-block;
+        height: 148px;
+        display: inline-block;
+        width: 148px;
+        border: 1px dashed #ccc;
+        margin: 0 8px 8px 0;
+        border-radius: 6px;
       }
       
       h3 {
