@@ -19,7 +19,7 @@
               v-model="showSendGoodsPopover">
               <el-form label-width="80px" label-position="right">
                 <el-row>
-                  <el-col :span="12">
+                  <el-col :span="8">
                     <el-row>
                       <el-col>
                         <el-form-item label="发货日期">
@@ -41,6 +41,13 @@
                               :value="item.value">
                             </el-option>
                           </el-select>
+                        </el-form-item>
+                      </el-col>
+                      <el-col>
+                        <el-form-item label="物流单号">
+                          <el-input
+                            size="small"
+                            placeholder="请输入内容"></el-input>
                         </el-form-item>
                       </el-col>
                     </el-row>
