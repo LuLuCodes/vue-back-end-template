@@ -5,8 +5,7 @@
     size="tiny"
     :show-close="false"
     :close-on-press-escape="false"
-    :close-on-click-modal="false"
-    :before-close="handleClose">
+    :close-on-click-modal="false">
     <span v-if="content">{{content}}</span>
     <slot></slot>
     <span slot="footer" class="dialog-footer">

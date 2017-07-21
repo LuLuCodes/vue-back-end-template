@@ -71,7 +71,7 @@
         <el-row class="receive-container-item">
           <el-col :span="2">
             <span style="color: #98a8b8;">备注说明&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <i class="el-icon-plus"></i>
+            <i class="el-icon-plus" @click="addRemark"></i>
           </el-col>
           <el-col :span="22">
             <el-row class="remark-item">
@@ -90,17 +90,22 @@
         </el-row>
       </div>
     </div>
+    
+    <remark-dialog :show-dialog="showRemarkDialog"></remark-dialog>
   </div>
 </template>
 
 <script>
+  import RemarkDialog from '../../components/RemarkDialog/index.vue';
   export default {
     name: 'OrderDetailPane',
-    components: {},
+    components: {
+      RemarkDialog
+    },
     data() {
       return {
         infoLoading: false,
-        baseInfo: {},
+        showRemarkDialog: false,
         pcdList: [
           {
             value: 100001,
@@ -218,6 +223,9 @@
         });
 
         return sums;
+      },
+      addRemark() {
+        this.showRemarkDialog = true;
       }
     }
   };
