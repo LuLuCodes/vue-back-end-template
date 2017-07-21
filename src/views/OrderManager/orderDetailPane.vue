@@ -74,16 +74,16 @@
             <i class="el-icon-plus"></i>
           </el-col>
           <el-col :span="22">
-            <el-row>
+            <el-row class="remark-item">
               备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明
             </el-row>
-            <el-row>
+            <el-row class="remark-item">
               备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明
             </el-row>
-            <el-row>
+            <el-row class="remark-item">
               备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明
             </el-row>
-            <el-row>
+            <el-row class="remark-item">
               备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明备注说明
             </el-row>
           </el-col>
@@ -242,7 +242,11 @@
         font-size: 14px;
         color: #415161;
         .receive-container-item {
-          margin: 12px 0;
+          .remark-item {
+            margin: 5px 0;
+            word-break: break-all;
+          }
+          margin: 20px 0;
         }
       }
       .postInfo-container {
