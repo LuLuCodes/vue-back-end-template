@@ -19,7 +19,7 @@
             expand-trigger="hover"
             :options="data2"
             v-model="category.parent"
-            @change="handleChange">
+            @change="handleChangeParentCategory">
           </el-cascader>
         </el-form-item>
       </el-form>
@@ -29,7 +29,7 @@
       </div>
     </el-dialog>
     
-    <simple-confirm-dialog :content="confirmContent" :dialog-visible="showConfrmDialog">
+    <simple-confirm-dialog :content="confirmContent" @closeDialog="showConfrmDialog = false" @confirm="showConfrmDialog = false">
       <span style="color: red">{{'你确定要删除分类吗？'}}</span>
     </simple-confirm-dialog>
   </div>
@@ -127,6 +127,8 @@
       remove(store, data) {
         // this.confirmContent = `你确定要删除分类${data.label}吗？`;
         this.showConfrmDialog =true;
+      },
+      handleChangeParentCategory() {
       }
     }
   };

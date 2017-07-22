@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     :title="title"
-    :visible.sync="dialogVisible"
+    :visible.sync="showDialog"
     size="tiny"
     :show-close="false"
     :close-on-press-escape="false"
@@ -31,7 +31,7 @@
         type: String,
         default: ''
       },
-      dialogVisible: {
+      showDialog: {
         type: Boolean,
         default: false
       }
@@ -42,10 +42,9 @@
     filters: {},
     methods: {
       cancel() {
-        this.dialogVisible = false;
+        this.$emit('closeDialog');
       },
       confirm() {
-        this.dialogVisible = false;
         this.$emit('confirm');
       }
     }
