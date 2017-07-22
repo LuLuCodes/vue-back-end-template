@@ -153,7 +153,7 @@
       </div>
     </div>
     
-    <remark-dialog :show-dialog="showRemarkDialog"></remark-dialog>
+    <remark-dialog :show-dialog="showRemarkDialog" @closeDialog="showRemarkDialog = false"></remark-dialog>
   </div>
 </template>
 

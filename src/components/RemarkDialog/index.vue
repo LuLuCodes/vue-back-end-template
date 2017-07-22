@@ -20,8 +20,8 @@
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="showDialog = false">取 消</el-button>
-      <el-button type="primary" @click="showDialog = false">确 定</el-button>
+      <el-button @click="closeDialog">取 消</el-button>
+      <el-button type="primary" @click="submitRemark">确 定</el-button>
     </div>
   </el-dialog>
 </template>
@@ -60,12 +60,11 @@
     },
     filters: {},
     methods: {
-      cancel() {
-        this.dialogVisible = false;
+      closeDialog() {
+        this.$emit('closeDialog');
       },
-      confirm() {
-        this.dialogVisible = false;
-        this.$emit('confirm');
+      submitRemark() {
+        this.$emit('closeDialog');
       },
       handleOpen() {
         this.from.content = this.content;
