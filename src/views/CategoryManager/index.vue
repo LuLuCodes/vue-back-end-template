@@ -29,7 +29,7 @@
       </div>
     </el-dialog>
     
-    <simple-confirm-dialog :content="confirmContent" @closeDialog="showConfrmDialog = false" @confirm="showConfrmDialog = false">
+    <simple-confirm-dialog :content="confirmContent" :show-dialog="showConfrmDialog" @closeDialog="showConfrmDialog = false" @confirm="showConfrmDialog = false">
       <span style="color: red">{{'你确定要删除分类吗？'}}</span>
     </simple-confirm-dialog>
   </div>
