@@ -33,7 +33,7 @@
                       </el-col>
                       <el-col>
                         <el-form-item label="物流公司">
-                          <el-select clearable placeholder="请选择" size="small">
+                          <el-select v-model="selectLogisticsCompany" clearable placeholder="请选择" size="small">
                             <el-option
                               v-for="item in logisticsCompany"
                               :key="item.value"
@@ -133,7 +133,7 @@
         <el-row class="receive-container-item">
           <el-col :span="2">
             <span style="color: #98a8b8;">备注说明&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <i class="el-icon-plus" @click="addRemark"></i>
+            <i class="el-icon-plus" @click.prevent.stop="addRemark"></i>
           </el-col>
           <el-col :span="22">
             <el-row class="remark-item">
@@ -170,6 +170,7 @@
         showRemarkDialog: false,
         showSendGoodsPopover: false,
         logisticsCompany: [{label: '顺丰快递', value: 0}, {label: '圆通快递', value: 1}],
+        selectLogisticsCompany: undefined,
         pcdList: [
           {
             value: 100001,
