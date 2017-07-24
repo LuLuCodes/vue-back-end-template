@@ -60,4 +60,14 @@
 
 ```
 
+## 效果图
+
+###
+
+![轮播图管理](https://github.com/LuLuCodes/vue-back-end-template/blob/master/gif/swiper.gif?raw=true)
+
+#### 
+
+![商品管理](https://github.com/LuLuCodes/vue-back-end-template/blob/master/gif/good.gif?raw=true)
+
 MIT
