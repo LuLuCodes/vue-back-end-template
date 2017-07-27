@@ -1,6 +1,9 @@
 # vue-back-end-template #
 **本项目的定位是后台集成方案，主要针对电商行业，包括了官网设置、客户管理、商品管理、订单管理等模块**
 
+## 参考项目
+本项目是基于[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)上，实现了具体的业务功能
+
 ## 功能
 - 官网管理
 - 客户管理
