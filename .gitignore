@@ -8,3 +8,6 @@ yarn-error.log
 test/unit/coverage
 test/e2e/reports
 selenium-debug.log
+server/public
+server/views
+server/logs/*
