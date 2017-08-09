@@ -54,6 +54,7 @@ export default function (url, json, method = 'post', timeout = 25000) {
   return new Promise((resolve, reject) => {
     if (!url || !json) {
       reject(`url or josn is null`);
+      return;
     }
 
     let req = {

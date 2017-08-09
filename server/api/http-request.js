@@ -19,6 +19,7 @@ exports = module.exports = function (cloud, url, json, method = 'post', timeout 
   var promise = new Promise((resolve, reject) => {
     if (!cloud || !url || !json) {
       reject('cloud, url, data参数错误');
+      return;
     }
 
     let req = {
