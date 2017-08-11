@@ -209,6 +209,18 @@
     },
     computed: {},
     created() {
+      this.$nextTick(() => {
+        sortable('.el-upload-list--picture-card', {
+          items: '.el-upload-list__item',
+          forcePlaceholderSize: true,
+          placeholderClass: 'my-sortable-placeholder'
+        });
+        sortable('.el-upload-list--picture-card')[0].addEventListener('sortupdate', (e) => {
+          // 调整图片顺序后，更新图片列表数组
+          console.log(`e.detail.index: ${e.detail.index}`);
+          console.log(`e.detail.oldindex: ${e.detail.oldindex}`);
+        });
+      });
     },
     mounted() {
       this.editor = new wangeditor('#editor');
