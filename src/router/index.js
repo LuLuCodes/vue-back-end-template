@@ -62,7 +62,7 @@ export const asyncRouterMap = [
     name: '首页',
     icon: 'fa-home',
     noDropdown: true,
-    children: [{path: 'index', component: Bashboard, name: '首页', meta: {keepAlive: false}}]
+    children: [{path: 'index', component: Bashboard, name: '首页', meta: {keepAlive: false, keepTabsView: true}}]
   },
   {
     path: '/web',
@@ -71,8 +71,8 @@ export const asyncRouterMap = [
     name: '官网设置',
     icon: 'fa-cogs',
     children: [
-      {path: 'swiper-manager', component: SwiperList, name: '轮播图设置', meta: {keepAlive: true}},
-      {path: 'add-swiper', component: AddSwiper, name: '新增轮播图', hidden: true, meta: {keepAlive: false}}
+      {path: 'swiper-manager', component: SwiperList, name: '轮播图设置', meta: {keepAlive: true, keepTabsView: true}},
+      {path: 'add-swiper', component: AddSwiper, name: '新增轮播图', hidden: true, meta: {keepAlive: false, keepTabsView: false}}
     ]
   },
   {
@@ -83,8 +83,8 @@ export const asyncRouterMap = [
     icon: 'fa-users',
     noDropdown: true,
     children: [
-      {path: 'client-manager', component: ClientList, name: '客户管理', meta: {keepAlive: true}},
-      {path: 'edit-client', component: EditClient, name: '编辑客户', hidden: true, meta: {keepAlive: false}}
+      {path: 'client-manager', component: ClientList, name: '客户管理', meta: {keepAlive: true, keepTabsView: true}},
+      {path: 'edit-client', component: EditClient, name: '编辑客户', hidden: true, meta: {keepAlive: false, keepTabsView: false}}
     ]
   },
   {
@@ -94,9 +94,9 @@ export const asyncRouterMap = [
     name: '商品管理',
     icon: 'fa-gift',
     children: [
-      {path: 'good-manager', component: GoodList, name: '商品列表', meta: {keepAlive: true}},
-      {path: 'add-good', component: AddGood, name: '新增商品', hidden: true, meta: {keepAlive: false}},
-      {path: 'category-manager', component: CategoryManager, name: '商品分类设置', meta: {keepAlive: false}}
+      {path: 'good-manager', component: GoodList, name: '商品列表', meta: {keepAlive: true, keepTabsView: true}},
+      {path: 'add-good', component: AddGood, name: '新增商品', hidden: true, meta: {keepAlive: false, keepTabsView: false}},
+      {path: 'category-manager', component: CategoryManager, name: '商品分类设置', meta: {keepAlive: false, keepTabsView: true}}
     ]
   },
   {
@@ -106,8 +106,8 @@ export const asyncRouterMap = [
     name: '订单管理',
     icon: 'fa-file-text',
     children: [
-      {path: 'order-manager', component: OrderList, name: '订单列表', meta: {keepAlive: true}},
-      {path: 'edit-order', component: EditOrder, name: '订单详情', hidden: true, meta: {keepAlive: false}}
+      {path: 'order-manager', component: OrderList, name: '订单列表', meta: {keepAlive: true, keepTabsView: true}},
+      {path: 'edit-order', component: EditOrder, name: '订单详情', hidden: true, meta: {keepAlive: false, keepTabsView: false}}
     ]
   },
   {path: '*', redirect: '/404', hidden: true}

@@ -28,7 +28,10 @@
         return this.$route.matched[0];
       },
       addViewTabs() {
-        this.$store.dispatch('addVisitedViews', this.generateRoute());
+        let view = this.generateRoute();
+        if (view.meta && view.meta.keepTabsView) {
+          this.$store.dispatch('addVisitedViews', view);
+        }
       },
       isActive(path) {
         return path === this.$route.path;
