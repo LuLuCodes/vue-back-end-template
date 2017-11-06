@@ -19,6 +19,7 @@
             </el-option>
           </el-select>
           <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleFilter" size="small">搜索</el-button>
+          <el-button class="filter-item" type="primary" v-waves icon="search" @click="handleDownload" size="small">导出</el-button>
         </el-col>
       </el-row>
     
@@ -95,6 +96,7 @@
 <script>
   import { parseTime } from '../../assets/js/tool';
   import keepAliveList from '../keepAliveList';
+  import { exportJsonToExcel } from '../../vendor/Export2Excel';
   
   const testData = [
     {id: 100001, title: '轮播图1', auditor: 'leyi', timestamp: '2017-07-17 12:12:12', url: 'http://img1.imgtn.bdimg.com/it/u=4024981923,3433833314&fm=26&gp=0.jpg', status: 1},
@@ -206,6 +208,17 @@
       },
       handleCreate() {
         this.jump({path: '/web/add-swiper'});
+      },
+      handleDownload() {
+        require.ensure([], () => {
+          const tHeader = ['编码', '标题', '作者', '发布时间', '图片'];
+          const filterVal = ['id', 'title', 'auditor', 'timestamp', 'url'];
+          const data = this.formatJson(filterVal, this.list);
+          exportJsonToExcel(tHeader, data, '列表excel');
+        });
+      },
+      formatJson(filterVal, jsonData) {
+        return jsonData.map(v => filterVal.map(j => v[j]));
       }
     },
     beforeRouteEnter (to, from, next) {
